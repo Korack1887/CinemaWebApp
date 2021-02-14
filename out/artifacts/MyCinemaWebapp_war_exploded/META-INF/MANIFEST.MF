@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: Егор
+Build-Jdk: 1.8.0_241
+Main-Class: theMainClass
+Class-Path: lib/mysql-connector-java-8.0.18.jar lib/protobuf-java-3.6.1.
+ jar lib/joda-time-2.10.jar lib/log4j-1.2.17.jar lib/commons-dbcp-1.4.ja
+ r lib/commons-pool-1.5.4.jar lib/commons-fileupload-1.4.jar lib/commons
+ -io-2.2.jar lib/taglibs-standard-spec-1.2.1.jar lib/taglibs-standard-im
+ pl-1.2.1.jar
+
