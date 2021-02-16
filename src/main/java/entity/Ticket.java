@@ -42,6 +42,16 @@ public class Ticket {
         this.column = column;
     }
 
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", session=" + session +
+                ", seat=" + seat +
+                ", column=" + column +
+                '}';
+    }
+
     public Ticket(Session session, Seat seat, Column column) {
         this.session = session;
         this.seat = seat;

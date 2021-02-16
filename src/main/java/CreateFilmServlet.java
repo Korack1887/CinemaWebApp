@@ -7,6 +7,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import server.dao.mysql.FilmMySQL;
 import server.dao.mysql.MysqlDAOFactory;
+import util.ConvertStringToDateSQL;
 
 
 import javax.imageio.ImageIO;
@@ -44,23 +45,15 @@ public class CreateFilmServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date langDate = null;
         ArrayList<Genre> genres = new ArrayList<>();
         String[] asd = req.getParameterValues("genre_film");
-        try {
-            langDate = sdf.parse(req.getParameter("release"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        java.sql.Date sql = new java.sql.Date(langDate.getTime());
-       /* Part filePart = req.getPart("film_pic"); // Retrieves <input type="file" name="file">
+        Part filePart = req.getPart("film_pic"); // Retrieves <input type="file" name="file">
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
         InputStream fileContent = filePart.getInputStream();
         BufferedImage bi = ImageIO.read(fileContent);
         String path = req.getSession().getServletContext().getRealPath("/images")+"\\"+fileName;
         System.out.print(path);
-        ImageIO.write(bi, "jpg", new File(path));*/  //Maybe someday i`ll get how to save pics
+        ImageIO.write(bi, "jpg", new File(path));
         for (String s: asd
              ) {
             genres.add(FilmMySQL.getInstance().getGenre(Integer.parseInt(s)));
@@ -70,11 +63,12 @@ public class CreateFilmServlet extends HttpServlet {
                 .nameUa(req.getParameter("film_nameUa"))
                 .description(req.getParameter("description"))
                 .descriptionUa(req.getParameter("descriptionUa"))
-                .date(sql)
+                .date(ConvertStringToDateSQL.convert(req.getParameter("release")))
                 .directors(FilmMySQL.getInstance().
                         getDirector(Integer.parseInt(req.getParameter("director_film"))))
                 .duration(Integer.parseInt(req.getParameter("duration")))
                 .genres(genres)
+                .image(fileName)
                 .build();
         FilmMySQL.getInstance().addFilm(newFilm);
     }

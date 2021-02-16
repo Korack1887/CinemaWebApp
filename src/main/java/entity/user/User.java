@@ -1,6 +1,6 @@
 package entity.user;
 
-import org.joda.time.DateTime;
+import java.sql.Date;
 
 public class User {
     private int id;
@@ -9,21 +9,21 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private DateTime birthday;
+    private Date birthday;
 
-    public User(Role role, Gender gender, String name, String email, String password, DateTime birthday) {
-        this.role = role;
-        this.gender = gender;
+    public User(String role, String gender, String name, String email, String password, Date birthday) {
+        this.role = Role.valueOf(role);
+        this.gender = Gender.valueOf(gender);
         this.name = name;
         this.email = email;
         this.password = password;
         this.birthday = birthday;
     }
 
-    public User(int id, Role role, Gender gender, String name, String email, String password, DateTime birthday) {
+    public User(int id, String role, String gender, String name, String email, String password, Date birthday) {
         this.id = id;
-        this.role = role;
-        this.gender = gender;
+        this.role = Role.valueOf(role);
+        this.gender = Gender.valueOf(gender);
         this.name = name;
         this.email = email;
         this.password = password;
@@ -58,6 +58,9 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+    public void setRole(String role) {
+        this.role = Role.valueOf(role);
+    }
 
     public Gender getGender() {
         return gender;
@@ -65,6 +68,9 @@ public class User {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+    public void setGender(String gender) {
+        this.gender = Gender.valueOf(gender);
     }
 
     public String getName() {
@@ -91,11 +97,11 @@ public class User {
         this.password = password;
     }
 
-    public DateTime getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(DateTime birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 }

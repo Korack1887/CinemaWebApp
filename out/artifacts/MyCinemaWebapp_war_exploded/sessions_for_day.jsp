@@ -15,6 +15,7 @@
 <c:forEach var="s" items="${sessions}">
     ${s.dateTime}<br>
    <a href="seats?session_id=${s.id}">${s.film.name}</a> <br>
+    <img src="/images/${s.film.image}">
 </c:forEach>
 <p>
     <a href="/createSession">Create new session</a>

@@ -4,8 +4,6 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import server.dao.*;
 
-
-import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -32,10 +30,11 @@ public class MysqlDAOFactory extends DAOFactory {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException 
 	 */
-	static Connection getConnection() throws SQLException {
+	static Connection getConnection() throws NamingException, SQLException {
 		log.trace("Start");
-		Connection con;
-		con = DBCPDataSource.getConnection();
+		InitialContext initContext= new InitialContext();
+		DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/mysql");
+		Connection con = ds.getConnection();
 		log.trace("Finish");
 		return con;
 	}
@@ -103,6 +102,16 @@ public class MysqlDAOFactory extends DAOFactory {
 				rs.close();
 			} catch (SQLException e) {
 				log.error(e.getLocalizedMessage(), e);
+			}
+		}
+	}
+
+	static void setAutocommit(Connection con,Boolean bool){
+		if(con!=null){
+			try {
+				con.setAutoCommit(bool);
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 	}

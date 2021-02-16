@@ -10,7 +10,7 @@ public class DBCPDataSource {
 
     static {
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jbdc:mysql://localhost:3307/cinemaWEB");
+        ds.setUrl("jbdc:mysql://localhost:3307/cinemaWEB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
         ds.setUsername("root");
         ds.setPassword("root");
         ds.setMinIdle(5);

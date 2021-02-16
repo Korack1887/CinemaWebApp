@@ -29,9 +29,11 @@ public class MyServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext servletContext = getServletContext();
+        HttpServletRequest servletRequest =request;
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/index.jsp");
         request.setAttribute("films", DateTimeUtil.getDaysForWeek());
         requestDispatcher.forward(request, response);
+        System.out.println();
     }
 
 

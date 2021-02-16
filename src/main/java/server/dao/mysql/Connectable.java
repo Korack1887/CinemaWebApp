@@ -14,13 +14,11 @@ public interface Connectable {
     Logger log = Logger.getLogger(HallMySQL.class);
 
     default Connection getConnection(){
-        Context initContext = null;
         try {
-            initContext = new InitialContext();
-        Context envContext  = (Context)initContext.lookup("java:/comp/env");
-        DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
-        return ds.getConnection();
-        } catch (NamingException | SQLException e) {
+            return MysqlDAOFactory.getConnection();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;

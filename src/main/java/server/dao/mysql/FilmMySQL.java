@@ -58,14 +58,9 @@ public class FilmMySQL implements FilmDAO,Connectable {
         } catch (SQLException e) {
             MysqlDAOFactory.rollback(con);
         }finally {
-            try {
-                con.setAutoCommit(true);
+                MysqlDAOFactory.setAutocommit(con, true);
                 MysqlDAOFactory.closeStatement(st);
                 MysqlDAOFactory.close(con);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
         }
     }
 
@@ -99,8 +94,7 @@ public class FilmMySQL implements FilmDAO,Connectable {
         st.setInt(6, film.getDirector().getId());
         st.setString(7, film.getDescriptionUa());
         st.setString(8, film.getNameUa());
-        st.setString(9, "Later");
-        //st.set smth to store picture path
+        st.setString(9, film.getImage());
         return st;
     }
 
@@ -131,9 +125,9 @@ public class FilmMySQL implements FilmDAO,Connectable {
                     .name(rs.getString("name"))
                     .date(new Date(rs.getTimestamp("date_entry").getTime()))
                     .duration(rs.getInt("time_duration"))
-                    .descriptionUa("descriptionUa")
-                    .nameUa("nameUa")
-                    .image("image")
+                    .descriptionUa(rs.getString("descriptionUa"))
+                    .nameUa(rs.getString("nameUa"))
+                    .image(rs.getString("image"))
                     .build();
         }catch (SQLException e){
             e.printStackTrace();
