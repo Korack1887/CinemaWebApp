@@ -55,6 +55,6 @@ public class CreateSessionServlet extends HttpServlet {
         Session getSession = new Session(dao.getHallDAO().getHall(1),
                 dao.getFilmDAO().getFilm(Integer.parseInt(req.getParameter("film_get"))),new DateTime(req.getParameter("date_get")));
         dao.getSessionDAO().addSession(getSession);
-        resp.sendRedirect("/sessions_for_day");
+        resp.sendRedirect("/sessions_for_day"+"?"+req.getParameter("day"));
     }
 }

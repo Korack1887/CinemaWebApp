@@ -8,6 +8,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import server.dao.mysql.FilmMySQL;
 import server.dao.mysql.MysqlDAOFactory;
 import util.ConvertStringToDateSQL;
+import util.ImageUtil;
 
 
 import javax.imageio.ImageIO;
@@ -51,6 +52,7 @@ public class CreateFilmServlet extends HttpServlet {
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
         InputStream fileContent = filePart.getInputStream();
         BufferedImage bi = ImageIO.read(fileContent);
+        bi = ImageUtil.resizeImage(bi,340,340);
         String path = req.getSession().getServletContext().getRealPath("/images")+"\\"+fileName;
         System.out.print(path);
         ImageIO.write(bi, "jpg", new File(path));

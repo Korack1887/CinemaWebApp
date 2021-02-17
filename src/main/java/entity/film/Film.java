@@ -2,13 +2,28 @@ package entity.film;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Film {
 private int id;
 private Director director;
 private List<Genre> genres;
 private String description;
-private String descriptionUa;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Film film = (Film) o;
+        return id == film.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    private String descriptionUa;
 private String name;
 private String nameUa;
 private Date date;

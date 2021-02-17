@@ -32,7 +32,7 @@
 </c:when>
     <c:otherwise>
         <c:choose>
-            <c:when test="${not empty sessionScope.ses_rol}">
+            <c:when test="${sessionScope.ses_rol!=''}">
         <a href="/addToCart?id_seat=${seat.id}&id_col=${column.id}&ses_id=${session_id}">1..</a>
             </c:when>
             <c:otherwise>

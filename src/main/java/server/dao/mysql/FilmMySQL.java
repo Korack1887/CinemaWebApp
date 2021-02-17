@@ -3,7 +3,9 @@ package server.dao.mysql;
 import entity.film.Director;
 import entity.film.Film;
 import entity.film.Genre;
+import entity.session.Session;
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import server.dao.FilmDAO;
 import server.dao.mysql.queries.FilmQueries;
 
@@ -84,6 +86,60 @@ public class FilmMySQL implements FilmDAO,Connectable {
         }
         return new Film();
     }
+    public ArrayList<Session> getSessionForFilm(int id){
+        ArrayList<Session> result = new ArrayList<>();
+        Connection con = getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try{
+            st = con.prepareStatement(FilmQueries.SQL_GET_SESSION_FOR_FILM);
+            st.setInt(1, id);
+            rs = st.executeQuery();
+            while(rs.next()){
+                result.add(unmapSession(rs));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            MysqlDAOFactory.closeResultSet(rs);
+            MysqlDAOFactory.closeStatement(st);
+            MysqlDAOFactory.close(con);
+        }
+        return result;
+    }
+
+    private Session unmapSession(ResultSet rs) throws SQLException {
+        return new Session(HallMySQL.getInstance().getHall(rs.getInt("id_hall")),getFilm(rs.getInt("id_film"))
+                , new DateTime(rs.getTimestamp("date")));
+    }
+
+    public ArrayList<Film> getFilmsForDate(List<String> dates){
+        ArrayList<Film> result = new ArrayList<>();
+        Connection con = getConnection();
+        CallableStatement st = null;
+        ResultSet rs = null;
+        try{
+        st = con.prepareCall(FilmQueries.SQL_GET_FILMS_FOR_DATE);
+            for (String s: dates
+                 ) {
+                st.setString(1, s);
+                rs = st.executeQuery();
+                while (rs.next()){
+                    Film addedFilm = unmapFilm(rs);
+                    if(!result.contains(addedFilm)){
+                        result.add(unmapFilm(rs));
+                    }
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+        MysqlDAOFactory.closeResultSet(rs);
+        MysqlDAOFactory.closeStatement(st);
+        MysqlDAOFactory.close(con);
+        }
+        return result;
+    }
 
     public PreparedStatement mapFilm(PreparedStatement st, Film film) throws SQLException {
         st.setInt(1, film.getId());
@@ -138,11 +194,11 @@ public class FilmMySQL implements FilmDAO,Connectable {
         }
         return new Film.Builder().name("error").build();
     }
-    public List<Film> getAllFilms() {
+    public ArrayList<Film> getAllFilms() {
         Connection con  = getConnection();
         Statement st = null;
         ResultSet rs = null;
-        List<Film> result = new ArrayList<>();
+        ArrayList<Film> result = new ArrayList<>();
         try {
             st = con.createStatement();
             rs = st.executeQuery(FilmQueries.SQL_GET_ALL_FILM);

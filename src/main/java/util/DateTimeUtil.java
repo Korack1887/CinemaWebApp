@@ -17,4 +17,13 @@ public class DateTimeUtil {
         }
         return result;
     }
+    public static ArrayList<String> getDaysForWeekReversed(){
+        ArrayList<String> result = new ArrayList<>();
+        DateTime currentDay = DateTime.now();
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("dd.MM");
+        for(int i=6;i>=0;i--){
+            result.add(fmt.print(currentDay.plusDays(i)));
+        }
+        return result;
+    }
 }

@@ -11,6 +11,7 @@ import server.dao.mysql.queries.SessionQueries;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SessionMySQL implements SessionDAO, Connectable {
@@ -112,6 +113,31 @@ public class SessionMySQL implements SessionDAO, Connectable {
                         , new DateTime(rs.getTimestamp("date"))));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            MysqlDAOFactory.closeResultSet(rs);
+            MysqlDAOFactory.closeStatement(st);
+            MysqlDAOFactory.close(con);
+        }
+        return result;
+    }
+
+    public HashMap<Session, Integer> getSessionSeats(ArrayList<Session> sessions){
+        HashMap<Session, Integer> result = new HashMap<>();
+        Connection con = getConnection();
+        CallableStatement st = null;
+        ResultSet rs = null;
+        try{
+            st = con.prepareCall("select get_available_seats_for_session(?) as seats;");
+            for (Session s: sessions
+                 ) {
+                st.setInt(1, s.getId());
+                rs = st.executeQuery();
+                while (rs.next()){
+                    result.put(s, rs.getInt("seats"));
+                }
+            }
+        }catch (SQLException e){
             e.printStackTrace();
         }finally {
             MysqlDAOFactory.closeResultSet(rs);

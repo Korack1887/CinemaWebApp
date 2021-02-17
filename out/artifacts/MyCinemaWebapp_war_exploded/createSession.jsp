@@ -14,7 +14,7 @@
 </head>
 <body>
 <h1>Create session for ${day}</h1>
-    <form method="post" action="createSession">
+    <form method="post" action="createSession?day=day_of_week=${day}">
 <input type="datetime-local" min="${minDate}" value="${minDate}" max="${maxDate}" name="date_get" readonly>
             <select name="film_get">
                 <c:forEach var="film" items="${films}">
