@@ -13,7 +13,8 @@
     <title>Title</title>
 </head>
 <body>
-<h1>${sessionScope.ses_role}</h1>
+<c:set var="role" value="${sessionScope.ses_role}"></c:set>
+<h1>${role}</h1>
 <c:set var="booked" value="${booked_seats}"/>
 <c:set var="ses_id" value="${session_id}" scope="session"></c:set>
 <c:set var="text" value="Session{id=${ses_id}"></c:set>
@@ -32,7 +33,7 @@
 </c:when>
     <c:otherwise>
         <c:choose>
-            <c:when test="${sessionScope.ses_rol!=''}">
+            <c:when test="${not empty role}">
         <a href="/addToCart?id_seat=${seat.id}&id_col=${column.id}&ses_id=${session_id}">1..</a>
             </c:when>
             <c:otherwise>
@@ -44,5 +45,6 @@
 </c:forEach>
     <br>
 </c:forEach>
+<a href="/sessions_for_day?day_of_week=${sessionScope.day}">Back</a>
 </body>
 </html>

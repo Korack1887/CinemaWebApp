@@ -3,16 +3,26 @@ package server.dao;
 import entity.film.Director;
 import entity.film.Film;
 import entity.film.Genre;
+import entity.session.Session;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface FilmDAO {
-    void addFilm(Film film) throws SQLException;
+    void addFilm(Film film);
     Film getFilm(int id);
-    List<Film> getAllFilms() throws SQLException;
+    ArrayList<Film> getFilmsForDate(List<String> date);
+    PreparedStatement mapFilm(PreparedStatement st, Film film) throws SQLException;
+    Film unmapFilm(ResultSet rs);
+    List<Film> getAllFilms();
+    List<Director> getAllDirector();
+    List<Genre> getAllGenres();
     void updateFilm(Film film);
     void deleteFilm(int id);
-    Director getDirector(int id);
+    Director getDirectorById(int id);
     Genre getGenre(int id);
+
 }

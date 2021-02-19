@@ -12,12 +12,17 @@
 	<button><a href="/changeLang">UA</a></button>
 	<button><a href="/changeLang?lang=eng">ENG</a></button>
 	<div class="dropdown">
-		<span>Mouse over me</span>
+		<span><a class="icon fa-bars"></a></span>
 		<div class="dropdown-content">
-			<button><a href="#"><h2>Login</h2></a></button>
-			<button><a href="#"><h2>Register</h2></a></button>
-			<button><a href="#"><h2>Films</h2></a></button>
+			<button><a href="/sign_in"><h2>Login</h2></a></button>
+			<button><a href="/login"><h2>Register</h2></a></button>
+			<c:if test="${not empty sessionScope.ses_role}">
+				<button><a href="/logout"><h2>Log out</h2></a></button>
+			</c:if>
 		</div>
+	</div>
+	<div class="cart">
+	<a href="/makeOrder" class="icon fa-shopping-cart"><span class="label">Make order</span></a>
 	</div>
 			<!-- Banner -->
 			<!--

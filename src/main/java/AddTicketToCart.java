@@ -1,7 +1,12 @@
 import entity.Ticket;
 import entity.hall.Column;
+import org.apache.log4j.Logger;
+import server.dao.DAOFactory;
+import server.dao.mysql.FilmMySQL;
 import server.dao.mysql.HallMySQL;
 import server.dao.mysql.SessionMySQL;
+import util.GetDAOForServlet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,19 +19,30 @@ import java.util.List;
 
 @WebServlet("/addToCart")
 public class AddTicketToCart extends HttpServlet {
+    private static final Logger log = Logger.getLogger(AddTicketToCart.class);
+    DAOFactory dao = null;
+
+    @Override
+    public void init() {
+        log.trace("init started");
+        dao = GetDAOForServlet.getDAO(this.getServletContext());
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Column col = HallMySQL.getInstance().getColumn(Integer.parseInt(req.getParameter("id_col")));
+        log.trace("doGet start");
+        log.debug("Adding new ticket to order");
+        Column col = dao.getHallDAO().getColumn(Integer.parseInt(req.getParameter("id_col")));
         int id_ses = Integer.parseInt(req.getParameter("ses_id"));
         List<Ticket> tickets = (List<Ticket>) req.getSession().getAttribute("tickets");
         if(tickets==null){
             tickets = new ArrayList<>();
         }
-        Ticket newTicket = new Ticket(SessionMySQL.getInstance().getSession(id_ses),
+        Ticket newTicket = new Ticket(dao.getSessionDAO().getSession(id_ses),
                 col.getSeats().get(Integer.parseInt(req.getParameter("id_seat"))-1), col);
         tickets.add(newTicket);
         req.getSession().setAttribute("tickets", tickets);
         resp.sendRedirect("/seats"+"?session_id="+id_ses);
+        log.trace("doGet finish");
     }
 }

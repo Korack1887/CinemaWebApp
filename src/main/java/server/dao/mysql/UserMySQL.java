@@ -27,6 +27,7 @@ public class UserMySQL implements Connectable, UserDAO {
         Connection con = getConnection();
         PreparedStatement st = null;
         try{
+            log.debug("Try to add User to db");
             st = con.prepareStatement(UserQueries.ADD_USER);
             st.setInt(1, user.getId());
             st.setString(2, user.getRole().toString());
@@ -38,6 +39,7 @@ public class UserMySQL implements Connectable, UserDAO {
             st.executeUpdate();
             return true;
         }catch (SQLException e){
+            log.debug("Error adding user to db");
             e.printStackTrace();
         }finally {
             MysqlDAOFactory.closeStatement(st);
@@ -51,6 +53,7 @@ public class UserMySQL implements Connectable, UserDAO {
         CallableStatement st = null;
         ResultSet rs = null;
         try{
+            log.debug("Try to check user params in db");
             st = con.prepareCall("select check_user(?, ?) as result");
             st.setString(1,email);
             st.setString(2, pass);
@@ -59,6 +62,7 @@ public class UserMySQL implements Connectable, UserDAO {
                 return rs.getBoolean("result");
             }
         }catch(SQLException e){
+            log.debug("Error checking user in db");
             e.printStackTrace();
         }finally {
             MysqlDAOFactory.closeResultSet(rs);
@@ -73,6 +77,7 @@ public class UserMySQL implements Connectable, UserDAO {
         PreparedStatement st = null;
         ResultSet rs = null;
         try{
+            log.debug("Try to get user from db by EMAIL: "+email);
             st = con.prepareCall(UserQueries.GET_USER_BY_EMAIL);
             st.setString(1,email);
             rs = st.executeQuery();
@@ -80,6 +85,7 @@ public class UserMySQL implements Connectable, UserDAO {
                 return unmapUser(rs);
             }
         }catch(SQLException e){
+            log.debug("Error getting user from db by EMAIL: "+ email);
             e.printStackTrace();
         }finally {
             MysqlDAOFactory.closeResultSet(rs);
@@ -89,6 +95,7 @@ public class UserMySQL implements Connectable, UserDAO {
         return null;
     }
     public User unmapUser(ResultSet rs) throws SQLException {
+        log.debug("Try to create User object from result set");
         User result;
         result = new User(rs.getInt("id_user"), rs.getString("role")
     , rs.getString("gender"), rs.getString("name"), rs.getString("email")

@@ -33,6 +33,7 @@ public class HallMySQL implements HallDAO, Connectable {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
+            log.debug("Try get hall by id: "+id);
             st = con.prepareStatement(HallQueries.GET_HALL);
             st.setInt(1, id);
             rs = st.executeQuery();
@@ -41,6 +42,7 @@ public class HallMySQL implements HallDAO, Connectable {
             }
         }
         catch (SQLException e) {
+            log.debug("Error getting hall by id: "+id);
             e.printStackTrace();
         }
         finally {
@@ -57,6 +59,7 @@ public class HallMySQL implements HallDAO, Connectable {
         ResultSet rs = null;
         Column result;
         try{
+            log.debug("Try get column by id: "+id);
             st = con.prepareStatement(HallQueries.GET_COLUMN);
             st.setInt(1, id);
             rs = st.executeQuery();
@@ -81,6 +84,7 @@ public class HallMySQL implements HallDAO, Connectable {
         ResultSet rs = null;
         ArrayList<Column> result = new ArrayList<>();
         try{
+            log.debug("Try get all halls");
             st = con.createStatement();
             rs = st.executeQuery(HallQueries.GET_ALL_COLUMN);
             while (rs.next()){
@@ -102,9 +106,11 @@ public class HallMySQL implements HallDAO, Connectable {
     }
     public Column unmapColumn(ResultSet rs){
         try {
+            log.debug("Try to create column from result set");
            return new Column(rs.getInt("id_column"),
                     rs.getInt("price"),HallMySQL.getInstance().getHall(1),null);
         } catch (SQLException e) {
+            log.debug("Error while creating column from result set");
             e.printStackTrace();
         }
         return null;
@@ -113,6 +119,7 @@ public class HallMySQL implements HallDAO, Connectable {
             PreparedStatement st;
             ResultSet rs;
             List<Seat> seats = new ArrayList<>();
+            log.debug("Try to add sets for column");
             st = con.prepareStatement(HallQueries.GET_ALL_SEATS_FOR_COLUMN);
             st.setInt(1, c.getId());
             rs = st.executeQuery();
@@ -127,6 +134,7 @@ public class HallMySQL implements HallDAO, Connectable {
         ResultSet rs = null;
         ArrayList<Seat> result = new ArrayList<>();
         try {
+            log.debug("Try to get all booked seats from session, session id: "+ session.getId());
             st = con.prepareCall(HallQueries.GET_BOOKED_SEATS);
             st.setInt(1,session.getId());
             rs = st.executeQuery();
@@ -136,7 +144,12 @@ public class HallMySQL implements HallDAO, Connectable {
             }
             return result;
         }catch (SQLException e){
+            log.debug("Error getting booked seats for session id: "+session.getId());
             e.printStackTrace();
+        }finally {
+            MysqlDAOFactory.closeResultSet(rs);
+            MysqlDAOFactory.closeStatement(st);
+            MysqlDAOFactory.close(con);
         }
         return null;
     }

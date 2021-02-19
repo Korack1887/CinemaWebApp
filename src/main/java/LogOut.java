@@ -18,12 +18,14 @@ public class LogOut extends HttpServlet {
         HttpSession session = req.getSession();
         session.invalidate();
         log.debug("session invalidated");
-        resp.sendRedirect("sessions_for_week.jsp");
+        resp.sendRedirect("/session_for_week");
         log.trace("doPost finish");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.trace("doGet start");
         doPost(req, resp);
+        log.trace("doGet finish");
     }
 }

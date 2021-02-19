@@ -2,10 +2,16 @@ package server.dao;
 
 import server.dao.mysql.MysqlDAOFactory;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 public abstract class DAOFactory {
 
     // List of DAO types supported by the factory
-
+    public static final int WSFACTORY = 2;
     private static TypeDAO defaultFactory = TypeDAO.MySQL;
 
     // There will be a method for each DAO that can be
@@ -33,7 +39,18 @@ public abstract class DAOFactory {
                 return null;
         }
     }
-
+    public static DAOFactory getDAOFactoryFromSettings(Properties properties) {
+        TypeDAO whichFactory;
+        whichFactory = TypeDAO.valueOf(properties.getProperty("dataBase"));
+        switch (whichFactory) {
+            case MySQL:
+                return new MysqlDAOFactory();
+//		case TypeDAO.Mongo:
+//			return new MongoDAOFactory();
+            default:
+                return null;
+        }
+    }
     public static DAOFactory getDAOFactory() {
         return getDAOFactory(defaultFactory);
     }

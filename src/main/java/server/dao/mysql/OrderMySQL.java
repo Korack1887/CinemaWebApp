@@ -36,18 +36,22 @@ public class OrderMySQL implements OrderDAO, Connectable {
         List<Ticket> tickets = order.getCart();
         ArrayList<Integer> ticketsId = new ArrayList<>();
         try{
+            log.debug("Try to create order");
+            log.debug("Setting AutoCommit to false");
             con.setAutoCommit(false);
             st = con.prepareStatement(OrderQueries.SQL_ADD_ORDER, PreparedStatement.RETURN_GENERATED_KEYS);
             st = mapOrder(st, order);
             st.executeUpdate();
+            log.debug("Order added");
             rs = st.getGeneratedKeys();
             if (rs.next()) {
                 orderId = rs.getInt(1);
                 log.debug("Inserted order id --> " + orderId);
             } else {
                 log.error("No data inserted");
-                throw new SQLException("addBook: No data inserted");
+                throw new SQLException("addOrder: No data inserted");
             }
+            log.debug("Adding selected tickets to db");
             st = con.prepareStatement(OrderQueries.SQL_ADD_TICKET, PreparedStatement.RETURN_GENERATED_KEYS);
             for (Ticket t: tickets
                  ) {
@@ -59,10 +63,12 @@ public class OrderMySQL implements OrderDAO, Connectable {
                     log.debug("Getting ticket id");
                 } else {
                     log.error("No data inserted");
-                    throw new SQLException("addBook: No data inserted");
+                    throw new SQLException("addTicket: No data inserted");
                 }
             }
+            log.debug("Tickets added");
             st.executeBatch();
+            log.debug("Try to add tickets to order");
             st = con.prepareStatement(OrderQueries.SQL_ADD_TO_CART);
             for (Integer t: ticketsId
                  ) {
@@ -71,13 +77,10 @@ public class OrderMySQL implements OrderDAO, Connectable {
                 st.addBatch();
             }
             st.executeBatch();
-            con.commit();
+            MysqlDAOFactory.commit(con);
         }catch (SQLException e){
-            try {
-                con.rollback();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+            log.debug("Error while creating new order");
+            MysqlDAOFactory.rollback(con);
             e.printStackTrace();
         }finally {
             MysqlDAOFactory.setAutocommit(con, true);

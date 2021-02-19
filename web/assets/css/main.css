@@ -8,6 +8,19 @@
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 */
 
+
+.cart{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.cart a{
+	margin-right: 35px;
+}
+.cart .icon{
+	font-size: 50px;
+	z-index: 10;
+}
 /* Reset */
 .dropdown {
 	position: relative;
