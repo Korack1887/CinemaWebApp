@@ -36,7 +36,7 @@ public class Login extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.trace("doGet start");
         ServletContext servletContext = getServletContext();
-        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/Login2.jsp");
+        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/Login.jsp");
         requestDispatcher.forward(req, resp);
         log.debug("Get to the login page");
         log.trace("doGet finish");

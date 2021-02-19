@@ -45,6 +45,26 @@ private String image;
                 '}';
     }
 
+    public String getGenresSTR(){
+        String result = "";
+        if(!genres.isEmpty()){
+            for (Genre g: genres
+                 ) {
+                result+=g.getName();
+                if(!g.equals(genres.get(genres.size()-1))){
+                    result+=", ";
+                }
+            }
+        }
+            return result;
+    }
+    public String getDirectorSTR(){
+        if(director!=null){
+            return director.getName();
+        }
+        return "";
+    }
+
     public int getId() {
         return id;
     }

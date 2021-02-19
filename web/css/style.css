@@ -20,7 +20,15 @@ a {
   color: #d21899;
   transition: 0.5s;
 }
-
+.member1{
+  margin-left: 10px;
+}
+a.dates{
+  font-size: 20px;
+}
+.btn h6{
+  margin: auto;
+}
 a:hover,
 a:active,
 a:focus {
