@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="/WEB-INF/locale.tld" prefix="lng" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +38,7 @@
       License: https://bootstrapmade.com/license/
     ======================================================= -->
 </head>
+<c:set var="lang" value="${sessionScope.session_lang}"></c:set>
 
 <body>
 <header id="header">
@@ -61,7 +63,7 @@
     </div>
 </header>
 <br><!-- #header -->
-<c:set var="film" value="${sessions[0].film}"></c:set>
+<c:set var="film" value="${film}"></c:set>
 <main id="main">
     <div class="container">
         <div class="row">
@@ -70,27 +72,25 @@
             <img src="/images/${film.image}" class="img-fluid">
                 </div>
             </div>
-        <div class="member1">
-        <div class="col-sm-8">
+        <div class="col-sm-6">
             <div class="row">
-                <h4><b>Name:</b> ${film.name}</h4>
+                <h4><b><lng:tr text="Name_film" locale="${lang}"/>:</b> ${film.langName(lang)}</h4>
             </div>
             <div class="row">
-                 <h5><b>Description:</b> ${film.description}</h5>
+                 <h5><b><lng:tr text="Description" locale="${lang}"/>:</b> ${film.langDescription(lang)}</h5>
             </div>
             <div class="row">
-             <h5><b>Duration:</b> ${film.duration}</h5>
+             <h5><b><lng:tr text="Duration" locale="${lang}"/>:</b> ${film.duration} <lng:tr text="Minutes" locale="${lang}"/></h5>
          </div>
             <div class="row">
-                <h5><b>Genres:</b> ${film.genresSTR}</h5>
+                <h5><b><lng:tr text="Genres" locale="${lang}"/>:</b> ${film.genresSTR}</h5>
             </div>
             <div class="row">
-                <h5><b>Director:</b> ${film.directorSTR}</h5>
+                <h5><b><lng:tr text="Director" locale="${lang}"/>:</b> ${film.directorSTR}</h5>
             </div>
             <div class="row">
-                <h5><b>Release:</b> ${film.date}</h5>
+                <h5><b><lng:tr text="Release" locale="${lang}"/>:</b> ${film.date}</h5>
             </div>
-        </div>
         </div>
         </div>
     </div>

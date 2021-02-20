@@ -65,6 +65,18 @@ private String image;
         return "";
     }
 
+    public String langName(String lang){
+        if(lang!=null && lang=="eng"){
+            return name;
+        }
+        return nameUa;
+    }
+    public String langDescription(String lang){
+        if(lang!=null && lang=="eng"){
+            return description;
+        }
+        return descriptionUa;
+    }
     public int getId() {
         return id;
     }

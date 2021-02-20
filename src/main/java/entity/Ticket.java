@@ -57,6 +57,12 @@ public class Ticket {
         this.seat = seat;
         this.column = column;
     }
+    public String getTicketInfo(String lang){
+        if(lang!=null && lang.equals("eng")){
+            return "Movie: "+session.getFilm().getName()+" date "+session.getDayAndMonthAndTime()+" row "+column.getId()+" seat "+seat.getId()+";";
+        }
+        return  "Фільм: "+session.getFilm().getNameUa()+" Дата "+session.getDayAndMonthAndTime()+" Рядок "+column.getId()+" Місце "+seat.getId()+";";
+    }
 
     public Ticket(int id, Session session, Seat seat, Column column) {
         this.id = id;

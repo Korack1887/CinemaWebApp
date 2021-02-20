@@ -182,7 +182,6 @@ public class FilmMySQL implements FilmDAO, Connectable {
         log.debug("Film creating error");
         return new Film.Builder().name("error").build();
     }
-
     public ArrayList<Film> getAllFilms() {
         Connection con = getConnection();
         Statement st = null;
@@ -204,6 +203,53 @@ public class FilmMySQL implements FilmDAO, Connectable {
             MysqlDAOFactory.close(con);
         }
         return result;
+    }
+    public ArrayList<Film> getAllFilms(int page) {
+        int start = page*3;
+        Connection con = getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<Film> result = new ArrayList<>();
+        try {
+            log.debug("Try to get all films from db");
+            st = con.prepareStatement(FilmQueries.SQL_GET_ALL_FILM_PAGE);
+            st.setInt(1,start);
+            st.setInt(2,3);
+            rs = st.executeQuery();
+            while (rs.next()) {
+                result.add(unmapFilm(rs));
+            }
+        } catch (SQLException e) {
+            log.debug("Error getting all films from db");
+            e.printStackTrace();
+        } finally {
+            MysqlDAOFactory.closeResultSet(rs);
+            MysqlDAOFactory.closeStatement(st);
+            MysqlDAOFactory.close(con);
+        }
+        return result;
+    }
+
+    public int getFilmsCount(){
+        Connection con = getConnection();
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            log.debug("Getting films count");
+            st = con.createStatement();
+            rs = st.executeQuery(FilmQueries.SQL_GET_FILM_COUNT);
+            while (rs.next()){
+                return rs.getInt("val");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            MysqlDAOFactory.closeResultSet(rs);
+            MysqlDAOFactory.closeStatement(st);
+            MysqlDAOFactory.close(con);
+        }
+        return 0;
     }
 
     public List<Director> getAllDirector() {
@@ -307,5 +353,39 @@ public class FilmMySQL implements FilmDAO, Connectable {
             MysqlDAOFactory.close(con);
         }
         return new Genre(0, "error");
+    }
+
+    @Override
+    public void addDirector(Director director) {
+        Connection con = getConnection();
+        PreparedStatement st = null;
+        try {
+            log.debug("Adding new director");
+            st = con.prepareStatement(FilmQueries.SQL_ADD_DIRECTOR);
+            st.setString(1, director.getName());
+            st.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            MysqlDAOFactory.closeStatement(st);
+            MysqlDAOFactory.close(con);
+        }
+    }
+
+    @Override
+    public void addGenre(Genre genre) {
+        Connection con = getConnection();
+        PreparedStatement st = null;
+        try {
+            log.debug("Adding new director");
+            st = con.prepareStatement(FilmQueries.SQL_ADD_GENRE);
+            st.setString(1, genre.getName());
+            st.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            MysqlDAOFactory.closeStatement(st);
+            MysqlDAOFactory.close(con);
+        }
     }
 }

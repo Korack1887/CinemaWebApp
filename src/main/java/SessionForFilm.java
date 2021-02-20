@@ -1,8 +1,6 @@
 import entity.session.Session;
 import org.apache.log4j.Logger;
 import server.dao.DAOFactory;
-import server.dao.mysql.FilmMySQL;
-import server.dao.mysql.SessionMySQL;
 import util.GetDAOForServlet;
 
 import javax.servlet.RequestDispatcher;
@@ -33,6 +31,7 @@ public class SessionForFilm extends HttpServlet {
         int id_film = Integer.parseInt(req.getParameter("id_film"));
         ArrayList<Session> sessions = dao.getSessionDAO().getSessionForFilm(id_film);
         req.setAttribute("sessions",sessions);
+        req.setAttribute("film", dao.getFilmDAO().getFilm(id_film));
         log.debug("Sessions -->" + sessions);
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/sessions_for_film.jsp");
         requestDispatcher.forward(req, resp);

@@ -2,8 +2,6 @@ import entity.Ticket;
 import entity.order.Order;
 import org.apache.log4j.Logger;
 import server.dao.DAOFactory;
-import server.dao.mysql.OrderMySQL;
-import server.dao.mysql.UserMySQL;
 import util.GetDAOForServlet;
 
 import javax.servlet.RequestDispatcher;

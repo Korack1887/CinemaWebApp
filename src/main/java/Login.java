@@ -1,11 +1,6 @@
-
-import entity.user.Gender;
-import entity.user.Role;
 import entity.user.User;
 import org.apache.log4j.Logger;
 import server.dao.DAOFactory;
-import server.dao.mysql.MysqlDAOFactory;
-import server.dao.mysql.UserMySQL;
 import util.ConvertStringToDateSQL;
 import util.GetDAOForServlet;
 
@@ -17,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
 
 
 @WebServlet("/login")

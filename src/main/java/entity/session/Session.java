@@ -59,10 +59,14 @@ public class Session {
     }
 
     public String getDayAndMonthAndTime() {
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("dd.MM HH:mm");
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("dd.MM - HH:mm");
         return fmt.print(dateTime);
     }
 
+    public String getTime(){
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("HH:mm");
+        return fmt.print(dateTime);
+    }
 
     public Session(int id, Hall hall, Film film, DateTime dateTime) {
         this.id = id;

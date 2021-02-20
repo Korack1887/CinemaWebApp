@@ -13,6 +13,9 @@
     <title>Title</title>
 </head>
 <body>
+|${minDate}|${maxDate}|<br>
+<c:set var="min" value="${minDate}"></c:set>
+<c:set var="max" value="${maxDate}"></c:set>
 <h1>Create session for ${day}</h1>
     <form method="post" action="createSession?day=day_of_week=${day}">
 <input type="datetime-local" min="${minDate}" value="${minDate}" max="${maxDate}" name="date_get" readonly>

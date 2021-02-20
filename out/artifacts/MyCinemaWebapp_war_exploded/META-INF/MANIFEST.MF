@@ -7,5 +7,5 @@ Class-Path: lib/mysql-connector-java-8.0.18.jar lib/protobuf-java-3.6.1.
  jar lib/joda-time-2.10.jar lib/log4j-1.2.17.jar lib/imgscalr-lib-4.2.ja
  r lib/commons-dbcp-1.4.jar lib/commons-pool-1.5.4.jar lib/commons-fileu
  pload-1.4.jar lib/commons-io-2.2.jar lib/taglibs-standard-spec-1.2.1.ja
- r lib/taglibs-standard-impl-1.2.1.jar
+ r lib/taglibs-standard-impl-1.2.1.jar lib/javax.servlet-api-4.0.1.jar
 

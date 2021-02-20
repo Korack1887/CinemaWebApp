@@ -4,8 +4,6 @@ import entity.session.comparators.SortSessionByFilmName;
 import entity.session.comparators.SortSessionBySeats;
 import org.apache.log4j.Logger;
 import server.dao.DAOFactory;
-import server.dao.mysql.SessionMySQL;
-import util.DateTimeUtil;
 import util.GetDAOForServlet;
 
 import javax.servlet.RequestDispatcher;

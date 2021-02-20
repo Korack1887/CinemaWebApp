@@ -31,6 +31,15 @@ public class MyServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.trace("doGet start");
+        int page;
+        String param_page;
+        try {
+            param_page = request.getParameter("page");
+            page = Integer.parseInt(param_page);
+        }catch (NumberFormatException e){
+            page=0;
+        }
+        request.setAttribute("page",page);
         String language = (String) request.getSession().getAttribute("session_lang");
         String sort_content = (String) request.getSession().getAttribute("sort_content");
         if (request.getParameter("sort_content") != null) {
@@ -38,13 +47,16 @@ public class MyServlet extends HttpServlet {
         }
         log.debug("Check sorting parameters");
         ServletContext servletContext = getServletContext();
-        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/index15.jsp");
+        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/index.jsp");
         if (sort_content != null && sort_content.equals("film")) {
             log.debug("Set sorting by film name");
             ArrayList<Film> films = FilmMySQL.getInstance().getFilmsForDate(DateTimeUtil.getDaysForWeek());
             String isAll = request.getParameter("all_film");
             if (isAll!=null && isAll.equals("true")){
-                films = FilmMySQL.getInstance().getAllFilms();
+                films = FilmMySQL.getInstance().getAllFilms(page);
+                request.setAttribute("all_film", "true");
+                request.getSession().setAttribute("last_page",
+                        Math.ceil(dao.getFilmDAO().getFilmsCount()/3));
                 log.debug("Show all films");
             }
             if (asc_order) {
@@ -72,5 +84,12 @@ public class MyServlet extends HttpServlet {
         log.trace("doGet finish");
     }
 
+    public boolean isLastPage(int page){
+        int count = dao.getFilmDAO().getFilmsCount();
+        if(count/page==3){
+            return true;
+        }
+        return false;
+    }
 
 }

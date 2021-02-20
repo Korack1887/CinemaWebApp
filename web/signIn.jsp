@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="/WEB-INF/locale.tld" prefix="lng" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,46 +40,30 @@
 </head>
 
 <body>
-<header id="header">
-    <div class="container-fluid">
-        <div id="logo" class="pull-left">
-            <h1><a href="#intro" class="scrollto">BizPage</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
-        </div>
-
-        <nav id="nav-menu-container">
-            <ul class="nav-menu">
-                <li class="menu-active"><a href="/hello">Home</a></li>
-                <li><a href="/sign_in">Login</a></li>
-                <li><a href="/login">Register</a></li>
-                <li><a href="/makeOrder" class="icon ion-android-cart"></a></li>
-                <li><c:if test="${not empty sessionScope.ses_role}">
-                    <a href="/logout"><h2>Log out</h2></a>
-                </c:if></li>
-            </ul>
-        </nav><!-- #nav-menu-container -->
-    </div>
-</header>
+<%@include file="jspf/navbar.jspf"%>
+<c:set var="lang" value="${sessionScope.session_lang}"></c:set>
 <br>
 <div class="card">
     <article class="card-body mx-auto" style="max-width: 400px;">
-        <h2>Sign in</h2>
+        <h2><lng:tr text="Login" locale="${lang}"/></h2>
         <form method="post" action="sign_in">
             <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
-                <input name="email" class="form-control" placeholder="Email address" type="email">
+                <input name="email" class="form-control" placeholder="<lng:tr text="Email_address" locale="${lang}"/>" type="email">
             </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input name="pass" class="form-control" placeholder="Enter password" type="password">
-            </div> <!-- form-group// -->
-            <p class="text-center"><h5>Don't have an account?</h5> <a href="/sign_in">Register</a> </p>
+                <input name="pass" class="form-control" placeholder="<lng:tr text="Password" locale="${lang}"/>" type="password">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-info"><h6><lng:tr text="Login" locale="${lang}"/></h6></button>
+            </div><!-- form-group// -->
+            <p class="text-center"><h5><lng:tr text="Dont_have_account" locale="${lang}"/></h5> <a href="/sign_in"><lng:tr text="Register" locale="${lang}"/></a> </p>
         </form>
     </article>
 </div> <!-- card.// -->

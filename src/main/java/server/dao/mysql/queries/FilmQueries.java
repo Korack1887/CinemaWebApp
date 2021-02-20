@@ -11,6 +11,8 @@ public interface FilmQueries {
 
      String SQL_GET_ALL_FILM = "Select * from film";
 
+     String SQL_GET_ALL_FILM_PAGE = "Select * from film limit ?,?";
+
      String SQL_GET_DIRECTOR = "Select * from director where id_director = ?";
 
      String SQL_GET_ALL_DIRECTOR = "Select * from director";
@@ -30,4 +32,10 @@ public interface FilmQueries {
      String SQL_GET_FILMS_FOR_DATE = "call get_film_for_date(?)";
 
      String SQL_GET_SESSION_FOR_FILM = "select * from session where id_film = ?";
+
+     String SQL_ADD_DIRECTOR = "Insert into director(name) values(?)";
+
+     String SQL_ADD_GENRE = "Insert into genre(name) values(?)";
+
+     String SQL_GET_FILM_COUNT = "Select count(*) as val from film";
 }

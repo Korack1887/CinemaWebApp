@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="/WEB-INF/locale.tld" prefix="lng" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,75 +40,59 @@
 </head>
 
 <body>
-<header id="header">
-    <div class="container-fluid">
-        <div id="logo" class="pull-left">
-            <h1><a href="#intro" class="scrollto">BizPage</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
-        </div>
-
-        <nav id="nav-menu-container">
-            <ul class="nav-menu">
-                <li class="menu-active"><a href="/hello">Home</a></li>
-                <li><a href="/sign_in">Login</a></li>
-                <li><a href="/login">Register</a></li>
-                <li><a href="/makeOrder" class="icon ion-android-cart"></a></li>
-                <li><c:if test="${not empty sessionScope.ses_role}">
-                    <a href="/logout"><h2>Log out</h2></a>
-                </c:if></li>
-            </ul>
-        </nav><!-- #nav-menu-container -->
-    </div>
-</header>
+<%@include file="jspf/navbar.jspf"%>
+<c:set var="ses_role" value="${sessionScope.ses_role}"></c:set>
+<c:set var="lang" value="${sessionScope.session_lang}"></c:set>
 <br>
 <div class="card">
     <article class="card-body mx-auto" style="max-width: 400px;">
-        <h2>Registration</h2>
+        <h2><lng:tr text="Register" locale="${lang}"/></h2>
         <form method="post" action="login">
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
-                <input name="name" class="form-control" placeholder="Full name" type="text">
+                <input name="name" class="form-control" placeholder="<lng:tr text="Name" locale="${lang}"></lng:tr>" type="text">
             </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
-                <input name="email" class="form-control" placeholder="Email address" type="email">
+                <input name="email" class="form-control" placeholder="<lng:tr text="Email_address" locale="${lang}"></lng:tr>" type="email">
             </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-building"></i> </span>
                 </div>
                 <select name="gender" class="form-control">
-                    <option value="MALE" selected>Male</option>
-                    <option value="FEMALE">Female</option>
+                    <option value="MALE" selected><lng:tr text="Male" locale="${lang}"></lng:tr></option>
+                    <option value="FEMALE"><lng:tr text="Female" locale="${lang}"></lng:tr></option>
                 </select>
             </div> <!-- form-group end.// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
                 </div>
-                <input name="birthday" class="form-control" placeholder="Enter your birthday" type="date">
+                <input name="birthday" class="form-control" placeholder="<lng:tr text="Your_birthday" locale="${lang}"></lng:tr>" type="date">
             </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input name="pass" class="form-control" placeholder="Create password" type="password">
+                <input name="pass" class="form-control" placeholder="<lng:tr text="Password" locale="${lang}"></lng:tr>" type="password">
             </div>
+            <c:if test="${ses_role eq 'ADMIN'}">
             <select name="role" class="form-control">
-                <option value="USER" selected>User</option>
-                <option value="ADMIN">Admin</option>
+                <option value="USER" selected><lng:tr text="User" locale="${lang}"></lng:tr></option>
+                <option value="ADMIN"><lng:tr text="Admin" locale="${lang}"></lng:tr></option>
             </select>
+            </c:if>
             <!-- form-group// -->
             <!-- form-group// -->
             <div class="form-group">
-                <button type="submit" class="btn btn-info"><h6>Create account</h6></button>
+                <button type="submit" class="btn btn-info"><h6><lng:tr text="Create_account" locale="${lang}"></lng:tr></h6></button>
             </div> <!-- form-group// -->
-            <p class="text-center"><h5>Have an account?</h5> <a href="/sign_in">Log In</a> </p>
+            <p class="text-center"><h5><lng:tr text="Have_account" locale="${lang}"/></h5> <a href="/sign_in"><lng:tr text="Login" locale="${lang}"></lng:tr></a> </p>
         </form>
     </article>
 </div> <!-- card.// -->

@@ -3,7 +3,6 @@ import entity.film.Genre;
 
 import org.apache.log4j.Logger;
 import server.dao.DAOFactory;
-import server.dao.mysql.FilmMySQL;
 import util.ConvertStringToDateSQL;
 import util.GetDAOForServlet;
 import util.ImageUtil;

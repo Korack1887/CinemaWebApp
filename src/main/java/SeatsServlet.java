@@ -1,8 +1,5 @@
-
 import org.apache.log4j.Logger;
 import server.dao.DAOFactory;
-import server.dao.mysql.HallMySQL;
-import server.dao.mysql.SessionMySQL;
 import util.GetDAOForServlet;
 
 import javax.servlet.RequestDispatcher;

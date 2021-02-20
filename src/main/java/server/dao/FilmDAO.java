@@ -17,12 +17,15 @@ public interface FilmDAO {
     ArrayList<Film> getFilmsForDate(List<String> date);
     PreparedStatement mapFilm(PreparedStatement st, Film film) throws SQLException;
     Film unmapFilm(ResultSet rs);
-    List<Film> getAllFilms();
+    List<Film> getAllFilms(int page);
+    ArrayList<Film> getAllFilms();
     List<Director> getAllDirector();
     List<Genre> getAllGenres();
     void updateFilm(Film film);
     void deleteFilm(int id);
     Director getDirectorById(int id);
     Genre getGenre(int id);
-
+    void addDirector(Director director);
+    void addGenre(Genre genre);
+    int getFilmsCount();
 }

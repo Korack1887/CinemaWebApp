@@ -1,6 +1,5 @@
 import org.apache.log4j.Logger;
 import server.dao.DAOFactory;
-import server.dao.mysql.UserMySQL;
 import util.GetDAOForServlet;
 
 import javax.servlet.RequestDispatcher;
@@ -39,10 +38,10 @@ public class Authorize extends HttpServlet {
         if(check){
             req.getSession().setAttribute("ses_role", dao.getUserDAO().getUserByEmail(email).getRole().toString());
             req.getSession().setAttribute("session_email", email);
-            resp.sendRedirect("/session_for_week");
+            resp.sendRedirect("/hello");
         }
         else {
-            resp.sendRedirect("/login");
+            resp.sendRedirect("/sign_in");
         }
         System.out.println(req.getSession().getAttribute("ses_role"));
     }
