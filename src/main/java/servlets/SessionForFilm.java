@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Create page with cinema sessions for film
+ */
 @WebServlet("/session_for_film")
 public class SessionForFilm extends HttpServlet {
     private static final Logger log = Logger.getLogger(SessionForFilm.class);

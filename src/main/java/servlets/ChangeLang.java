@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet to get selected language and store in sessionScope
+ */
 @WebServlet("/changeLang")
 public class ChangeLang extends HttpServlet {
     private static final Logger log = Logger.getLogger(ChangeLang.class);

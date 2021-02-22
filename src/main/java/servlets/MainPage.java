@@ -19,9 +19,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-@WebServlet("/hello")
-public class MyServlet extends HttpServlet {
-    private static final Logger log = Logger.getLogger(MyServlet.class);
+/**
+ * Servlet to send information to the main page
+ */
+@WebServlet("")
+public class MainPage extends HttpServlet {
+    private static final Logger log = Logger.getLogger(MainPage.class);
     DAOFactory dao = null;
     boolean asc_order = true;
 

@@ -10,7 +10,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Utility class to get DAOFactory for exact database from settings file
+ */
 public class GetDAOForServlet extends HttpServlet {
+    /**
+     * @param servletContext to get real path
+     * @return created DAOFactory
+     */
     public static DAOFactory getDAO(ServletContext servletContext) {
         DAOFactory dao;
         Properties properties = new Properties();

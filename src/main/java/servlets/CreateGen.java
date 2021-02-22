@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet to handle Genre creation
+ */
 @WebServlet("/createGen")
 public class CreateGen extends HttpServlet {
     private static final Logger log = Logger.getLogger(CreateGen.class);

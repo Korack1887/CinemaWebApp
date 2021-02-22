@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Servlet to add ticket to session scope list of tickets
+ */
 @WebServlet("/addToCart")
 public class AddTicketToCart extends HttpServlet {
     private static final Logger log = Logger.getLogger(AddTicketToCart.class);

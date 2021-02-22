@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Filter to not allow users to get into admin pages
+ */
 @WebFilter(filterName = "server.filter.SecurityFilter")
 public class SecurityFilter implements Filter {
     public void destroy() {

@@ -24,6 +24,9 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * Servlet to handle film creation
+ */
 @WebServlet("/create_film")
 @MultipartConfig
 public class CreateFilmServlet extends HttpServlet {
@@ -52,8 +55,8 @@ public class CreateFilmServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ArrayList<Genre> genres = new ArrayList<>();
         String[] asd = req.getParameterValues("genre_film");
-        Part filePart = req.getPart("film_pic"); // Retrieves <input type="file" name="file">
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+        Part filePart = req.getPart("film_pic");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         InputStream fileContent = filePart.getInputStream();
         BufferedImage bi = ImageIO.read(fileContent);
         String path = req.getSession().getServletContext().getRealPath("/images") + "\\" + fileName;

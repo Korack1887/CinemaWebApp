@@ -19,6 +19,9 @@ import java.io.IOException;
 import java.util.List;
 
 
+/**
+ * Servlet to handle cinema session creation
+ */
 @WebServlet("/createSession")
 public class CreateSessionServlet extends HttpServlet {
     DAOFactory dao = null;

@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
+/**
+ * Create page with cinema sessionы for day
+ */
 @WebServlet("/sessions_for_day")
 public class SessionDay extends HttpServlet {
     private static final Logger log = Logger.getLogger(SessionDay.class);

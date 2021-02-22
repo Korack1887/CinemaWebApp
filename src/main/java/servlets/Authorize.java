@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet to check user credentials after logging in and if success put parameters to sessionScope
+ */
 @WebServlet("/sign_in")
 public class Authorize extends HttpServlet {
     private static final Logger log = Logger.getLogger(Authorize.class);

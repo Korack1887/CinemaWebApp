@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Servlet to handle order creation
+ */
 @WebServlet("/makeOrder")
 public class MakeOrder extends HttpServlet {
     private static final Logger log = Logger.getLogger(MakeOrder.class);

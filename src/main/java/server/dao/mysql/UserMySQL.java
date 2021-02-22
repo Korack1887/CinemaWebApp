@@ -22,6 +22,7 @@ public class UserMySQL implements Connectable, UserDAO {
     }
 
 
+
     public boolean addUser(User user) {
         Connection con = getConnection();
         PreparedStatement st = null;
@@ -94,6 +95,11 @@ public class UserMySQL implements Connectable, UserDAO {
         return null;
     }
 
+    /**
+     * @param rs ResultSet to fill new object with data from database
+     * @return new object filled with data from database
+     * @throws SQLException if error occures during rs.get(dataType)
+     */
     public User unmapUser(ResultSet rs) throws SQLException {
         log.debug("Try to create User object from result set");
         User result;

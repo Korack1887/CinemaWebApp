@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
+/**
+ * Servlet to handle new user creation
+ */
 @WebServlet("/login")
 public class Login extends HttpServlet {
     DAOFactory dao = null;

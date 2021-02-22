@@ -10,6 +10,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Properties;
 
+/**
+ * Tag descriptor for tag library to translate interface
+ */
 public class LocaleTagDescriptor extends SimpleTagSupport {
     String locale;
     String text;

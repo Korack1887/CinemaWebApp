@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Servlet to handle logging out
+ */
 @WebServlet("/logout")
 public class LogOut extends HttpServlet {
     private static final Logger log = Logger.getLogger(LogOut.class);

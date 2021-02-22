@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
+/**
+ * Servlet to create page about available seats on cinema session
+ */
 @WebServlet("/seats")
 public class SeatsServlet extends HttpServlet {
     DAOFactory dao = null;

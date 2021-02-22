@@ -6,9 +6,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Filter to check if user is authenticated before adding tickets to cart or making order
+ */
 public class AuthFilter implements Filter {
-    public void destroy() {
-    }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest req = (HttpServletRequest) request;
@@ -21,6 +22,4 @@ public class AuthFilter implements Filter {
         }
     }
 
-    public void init(FilterConfig config) throws ServletException {
-    }
 }

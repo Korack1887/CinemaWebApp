@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet to handle director creation
+ */
 @WebServlet("/createDir")
 public class CreateDir extends HttpServlet {
     private static final Logger log = Logger.getLogger(Authorize.class);
