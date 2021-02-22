@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class ConvertStringToDateSQL {
-    public static Date convert(String s){
+    public static Date convert(String s) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date langDate = null;
         try {

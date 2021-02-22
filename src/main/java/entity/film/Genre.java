@@ -1,11 +1,18 @@
 package entity.film;
 
+/**
+ * Java bean for genre entity
+ */
 public class Genre {
+    /**
+     * id - object id
+     * name - genre's name
+     */
     private int id;
     private String Name;
 
     public Genre(String name) {
-        this.Name=name;
+        this.Name = name;
     }
 
     public int getId() {

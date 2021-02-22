@@ -2,10 +2,6 @@ package server.dao;
 
 import server.dao.mysql.MysqlDAOFactory;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public abstract class DAOFactory {
@@ -28,7 +24,6 @@ public abstract class DAOFactory {
     public abstract UserDAO getUserDAO();
 
 
-
     public static DAOFactory getDAOFactory(TypeDAO whichFactory) {
         switch (whichFactory) {
             case MySQL:
@@ -39,6 +34,7 @@ public abstract class DAOFactory {
                 return null;
         }
     }
+
     public static DAOFactory getDAOFactoryFromSettings(Properties properties) {
         TypeDAO whichFactory;
         whichFactory = TypeDAO.valueOf(properties.getProperty("dataBase"));
@@ -51,6 +47,7 @@ public abstract class DAOFactory {
                 return null;
         }
     }
+
     public static DAOFactory getDAOFactory() {
         return getDAOFactory(defaultFactory);
     }

@@ -4,6 +4,10 @@ import entity.film.Film;
 
 import java.util.Comparator;
 
+
+/**
+ * Class for sorting films by name parameter
+ */
 public class FilmNameComparator implements Comparator {
     @Override
     public int compare(Object o1, Object o2) {

@@ -4,7 +4,16 @@ import entity.hall.Column;
 import entity.hall.Seat;
 import entity.session.Session;
 
+/**
+ * Java bean to store booked seat
+ */
 public class Ticket {
+    /**
+     * id - ticket id
+     * session - cinema session for ticket
+     * seat - seat in hall for ticket
+     * column(row, see column javadoc) - row in hall for ticket
+     */
     int id;
     Session session;
     Seat seat;
@@ -57,11 +66,12 @@ public class Ticket {
         this.seat = seat;
         this.column = column;
     }
-    public String getTicketInfo(String lang){
-        if(lang!=null && lang.equals("eng")){
-            return "Movie: "+session.getFilm().getName()+" date "+session.getDayAndMonthAndTime()+" row "+column.getId()+" seat "+seat.getId()+";";
+
+    public String getTicketInfo(String lang) {
+        if (lang != null && lang.equals("eng")) {
+            return "Movie: " + session.getFilm().getName() + " date " + session.getDayAndMonthAndTime() + " row " + column.getId() + " seat " + seat.getId() + ";";
         }
-        return  "Фільм: "+session.getFilm().getNameUa()+" Дата "+session.getDayAndMonthAndTime()+" Рядок "+column.getId()+" Місце "+seat.getId()+";";
+        return "Фільм: " + session.getFilm().getNameUa() + " Дата " + session.getDayAndMonthAndTime() + " Рядок " + column.getId() + " Місце " + seat.getId() + ";";
     }
 
     public Ticket(int id, Session session, Seat seat, Column column) {

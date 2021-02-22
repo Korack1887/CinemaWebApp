@@ -16,7 +16,8 @@
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+          rel="stylesheet">
 
     <!-- Bootstrap CSS File -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -40,10 +41,9 @@
 </head>
 
 <body>
-<%@include file="jspf/navbar.jspf"%>
+<%@include file="jspf/navbar.jspf" %>
 <c:set var="lang" value="${sessionScope.session_lang}"></c:set>
 <br>
-
 
 
 <main id="main">
@@ -51,11 +51,15 @@
     <c:set var="film" value="${sessions[0].film}"></c:set>
     <c:set var="role" value="${sessionScope.ses_role}"></c:set>
     <div class="container">
-        <h5>|<a href="/sessions_for_day?day_of_week=${day}&sort_content="><lng:tr text="Sort_by_time" locale="${lang}"/></a>|
-            |<a href="/sessions_for_day?day_of_week=${day}&sort_content=seat"><lng:tr text="Sort_by_seats" locale="${lang}"/></a>|
-            |<a href="/sessions_for_day?day_of_week=${day}&sort_content=film"><lng:tr text="Sort_by_film_name" locale="${lang}"/></a>|<br></h5>
+        <h5>|<a href="/sessions_for_day?day_of_week=${day}&sort_content="><lng:tr text="Sort_by_time"
+                                                                                  locale="${lang}"/></a>|
+            |<a href="/sessions_for_day?day_of_week=${day}&sort_content=seat"><lng:tr text="Sort_by_seats"
+                                                                                      locale="${lang}"/></a>|
+            |<a href="/sessions_for_day?day_of_week=${day}&sort_content=film"><lng:tr text="Sort_by_film_name"
+                                                                                      locale="${lang}"/></a>|<br></h5>
         <br>
-        <c:if test="${role eq 'ADMIN'}"><a href="/createSession?day=${day}"><lng:tr text="Create_session" locale="${lang}"/></a></c:if>
+        <c:if test="${role eq 'ADMIN'}"><a href="/createSession?day=${day}"><lng:tr text="Create_session"
+                                                                                    locale="${lang}"/></a></c:if>
         <h3>${day}</h3>
         <div class="row">
             <c:choose>
@@ -73,32 +77,32 @@
                 </c:when>
                 <c:when test="${sessionScope.sort_content eq 'seat'}">
                     <c:forEach var="sessionSeat" items="${sessionsSeat}">
-                <div class="border-primary">
-                        <div class="col-sm-1">
-                            <a href="seats?session_id=${sessionSeat.key.id}" class="dates">
-                                    ${sessionSeat.key.time}
-                            </a>
+                        <div class="border-primary">
+                            <div class="col-sm-1">
+                                <a href="seats?session_id=${sessionSeat.key.id}" class="dates">
+                                        ${sessionSeat.key.time}
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4><b><lng:tr text="Movie" locale="${lang}"/>: </b>${sessionSeat.key.film.name}</h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4><b><lng:tr text="Available_seats" locale="${lang}"/>: </b>${sessionSeat.value}</h4>
+                            </div>
                         </div>
-                        <div class="col-sm-4">
-                            <h4><b><lng:tr text="Movie" locale="${lang}"/>: </b>${sessionSeat.key.film.name}</h4>
-                        </div>
-                        <div class="col-sm-4">
-                            <h4><b><lng:tr text="Available_seats" locale="${lang}"/>: </b>${sessionSeat.value}</h4>
-                        </div>
-                </div>
                     </c:forEach>
                 </c:when>
                 <c:otherwise>
                     <c:forEach var="s" items="${sessions}">
                         <div class="border-primary">
-                    <div class="col-sm-1">
-                        <a href="seats?session_id=${s.id}" class="dates">
-                                ${s.time}
-                        </a>
-                    </div>
-                        <div class="col-sm-2">
-                            <h4><b><lng:tr text="Movie" locale="${lang}"/>: </b>${s.film.name}</h4>
-                        </div>
+                            <div class="col-sm-1">
+                                <a href="seats?session_id=${s.id}" class="dates">
+                                        ${s.time}
+                                </a>
+                            </div>
+                            <div class="col-sm-2">
+                                <h4><b><lng:tr text="Movie" locale="${lang}"/>: </b>${s.film.name}</h4>
+                            </div>
                         </div>
                     </c:forEach>
                 </c:otherwise>

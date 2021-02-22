@@ -12,7 +12,7 @@
 </head>
 <body>
 <form method="post" action="createDir">
-    <input name="name" type="text">
+    <input name="name" type="text" required>
     <h3>Name</h3>
     <input type="submit">
 </form>

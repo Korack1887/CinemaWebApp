@@ -3,14 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <servlet>
-        <servlet-name>MyServlet</servlet-name>
-        <servlet-class>MyServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MyServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
-    </servlet-mapping>
     <filter>
         <display-name>EncodingFilter</display-name>
         <filter-name>EncodingFilter</filter-name>
@@ -25,6 +17,39 @@
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>SecurityFilter</filter-name>
+        <filter-class>server.filter.SecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SecurityFilter</filter-name>
+        <url-pattern>/createDir</url-pattern>
+        <url-pattern>/create_film</url-pattern>
+        <url-pattern>/createGen</url-pattern>
+        <url-pattern>/createSession</url-pattern>
+
+    </filter-mapping>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>server.filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/addToCart</url-pattern>
+        <url-pattern>/makeOrder</url-pattern>
+    </filter-mapping>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
     <resource-ref>
         <res-ref-name>jdbc/mysql</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>

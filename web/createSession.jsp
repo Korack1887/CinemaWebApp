@@ -17,14 +17,14 @@
 <c:set var="min" value="${minDate}"></c:set>
 <c:set var="max" value="${maxDate}"></c:set>
 <h1>Create session for ${day}</h1>
-    <form method="post" action="createSession?day=day_of_week=${day}">
-<input type="datetime-local" min="${minDate}" value="${minDate}" max="${maxDate}" name="date_get" readonly>
-            <select name="film_get">
-                <c:forEach var="film" items="${films}">
-                    <option value="${film.id}">${film.name}</option>
-                </c:forEach>
-        </select>
-        <input type="submit">
-    </form>
+<form method="post" action="createSession?day=day_of_week=${day}">
+    <input type="datetime-local" min="${minDate}" value="${minDate}" max="${maxDate}" name="date_get" readonly>
+    <select name="film_get" required>
+        <c:forEach var="film" items="${films}">
+            <option value="${film.id}">${film.name}</option>
+        </c:forEach>
+    </select>
+    <input type="submit">
+</form>
 </body>
 </html>

@@ -16,7 +16,8 @@
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+          rel="stylesheet">
 
     <!-- Bootstrap CSS File -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,7 +35,7 @@
 </head>
 
 <body>
-<%@include file="jspf/navbar.jspf"%>
+<%@include file="jspf/navbar.jspf" %>
 <br>
 <c:set var="lang" value="${sessionScope.session_lang}"></c:set>
 
@@ -54,40 +55,32 @@
     </c:forEach>
     <br>
     <div class="center-block">
-    <c:forEach var="column" items="${seats}">
-        <div class="row">
-        <c:forEach var="seat" items="${column.seats}">
-            <c:set value="${column.price+seat.price}" var="price"></c:set>
-            <div class="col-sm-1">
-            <c:choose>
-                <c:when test="${fn:containsIgnoreCase(booked, seat)}">
-                    <a href="" class="icon ion-android-cancel"></a>
-                </c:when>
-                <c:when test="${fn:contains(smth, seat)&&fn:contains(smth, text)}">
-                    <a href="" class="icon ion-android-checkbox-outline"></a>
-                </c:when>
-                <c:otherwise>
-                    <c:choose>
-                        <c:when test="${not empty role}">
-                            <a href="/addToCart?id_seat=${seat.id}&id_col=${column.id}&ses_id=${session_id}"
-                               class="icon ion-android-checkbox-outline-blank" title="<lng:tr text="Row" locale="${lang}"/>: ${column.id}
+        <c:forEach var="column" items="${seats}">
+            <div class="row">
+                <c:forEach var="seat" items="${column.seats}">
+                    <c:set value="${column.price+seat.price}" var="price"></c:set>
+                    <div class="col-sm-1">
+                        <c:choose>
+                            <c:when test="${fn:containsIgnoreCase(booked, seat)}">
+                                <a href="" class="icon ion-android-cancel"></a>
+                            </c:when>
+                            <c:when test="${fn:contains(smth, seat)&&fn:contains(smth, text)}">
+                                <a href="" class="icon ion-android-checkbox-outline"></a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="/addToCart?id_seat=${seat.id}&id_col=${column.id}&ses_id=${session_id}"
+                                   class="icon ion-android-checkbox-outline-blank"
+                                   title="<lng:tr text="Row" locale="${lang}"/>: ${column.id}
 <lng:tr text="Column" locale="${lang}"/>: ${seat.id}
 <lng:tr text="Price" locale="${lang}"/>: ${price}"></a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="/login" class="icon ion-android-checkbox-outline-blank" title="<lng:tr text="Row" locale="${lang}"/>: ${column.id}
-<lng:tr text="Column" locale="${lang}"/>: ${seat.id}
-<lng:tr text="Price" locale="${lang}"/>: ${price}"></a>
-                        </c:otherwise>
-                    </c:choose>
-                </c:otherwise>
-            </c:choose>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </c:forEach>
+                <br>
             </div>
         </c:forEach>
-        <br>
-        </div>
-    </c:forEach>
-        </div>
+    </div>
     <a href="/sessions_for_day?day_of_week=${sessionScope.day}"><lng:tr text="Back" locale="${lang}"/></a>
 </main>
 <!--container end.//-->

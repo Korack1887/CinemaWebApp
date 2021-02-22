@@ -2,7 +2,19 @@ package entity.user;
 
 import java.sql.Date;
 
+/**
+ * Java bean stores user information
+ */
 public class User {
+    /**
+     * id - user's id
+     * role - user's role (admin or user)
+     * gender - user's gender (male or female)
+     * name - user's name
+     * email - user email
+     * password - user password
+     * birthday - user birthday
+     */
     private int id;
     private Role role;
     private Gender gender;
@@ -12,6 +24,9 @@ public class User {
     private Date birthday;
 
     public User(String role, String gender, String name, String email, String password, Date birthday) {
+        if (role == null) {
+            role = "USER";
+        }
         this.role = Role.valueOf(role);
         this.gender = Gender.valueOf(gender);
         this.name = name;
@@ -58,6 +73,7 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
     public void setRole(String role) {
         this.role = Role.valueOf(role);
     }
@@ -69,6 +85,7 @@ public class User {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+
     public void setGender(String gender) {
         this.gender = Gender.valueOf(gender);
     }

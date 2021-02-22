@@ -1,5 +1,9 @@
 package server.dao.mysql.queries;
 
+
+/**
+ * Store strings which contains queries for SQL to work with hall, rows and seats entities
+ */
 public interface HallQueries {
     String GET_HALL = "Select * from hall where id_hall=?";
     String GET_ALL_COLUMN = "Select * from `column`";

@@ -8,20 +8,21 @@ import java.util.ArrayList;
 
 
 public class DateTimeUtil {
-   public static ArrayList<String> getDaysForWeek(){
+    public static ArrayList<String> getDaysForWeek() {
         ArrayList<String> result = new ArrayList<>();
         DateTime currentDay = DateTime.now();
         DateTimeFormatter fmt = DateTimeFormat.forPattern("dd.MM");
-        for(int i=0;i<7;i++){
+        for (int i = 0; i < 7; i++) {
             result.add(fmt.print(currentDay.plusDays(i)));
         }
         return result;
     }
-    public static ArrayList<String> getDaysForWeekReversed(){
+
+    public static ArrayList<String> getDaysForWeekReversed() {
         ArrayList<String> result = new ArrayList<>();
         DateTime currentDay = DateTime.now();
         DateTimeFormatter fmt = DateTimeFormat.forPattern("dd.MM");
-        for(int i=6;i>=0;i--){
+        for (int i = 6; i >= 0; i--) {
             result.add(fmt.print(currentDay.plusDays(i)));
         }
         return result;

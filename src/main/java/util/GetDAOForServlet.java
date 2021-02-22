@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class GetDAOForServlet extends HttpServlet {
-    public static DAOFactory getDAO(ServletContext servletContext){
+    public static DAOFactory getDAO(ServletContext servletContext) {
         DAOFactory dao;
         Properties properties = new Properties();
-        File file  = new File(servletContext.getRealPath("/WEB-INF/settings.properties"));
+        File file = new File(servletContext.getRealPath("/WEB-INF/settings.properties"));
         FileReader reader = null;
         try {
             reader = new FileReader(file);

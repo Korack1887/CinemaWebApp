@@ -8,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.Properties;
 
 public class LocaleTagDescriptor extends SimpleTagSupport {
@@ -29,12 +28,11 @@ public class LocaleTagDescriptor extends SimpleTagSupport {
         Properties props = new Properties();
         URL path = this.getClass().getProtectionDomain().getCodeSource().getLocation();
         FileInputStream input;
-    if(locale!=null && locale.equals("eng")){
-        input = new FileInputStream(new File(path.getFile()+ "tags/engLocale.properties"));
-    }
-    else {
-        input = new FileInputStream(new File(path.getFile()+ "tags/uaLocale.properties"));
-    }
+        if (locale != null && locale.equals("eng")) {
+            input = new FileInputStream(new File(path.getFile() + "tags/engLocale.properties"));
+        } else {
+            input = new FileInputStream(new File(path.getFile() + "tags/uaLocale.properties"));
+        }
         props.load(new InputStreamReader(input));
         String result = props.getProperty(text);
         out.print(result);

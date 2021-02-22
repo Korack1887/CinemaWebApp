@@ -4,6 +4,9 @@ import entity.session.Session;
 
 import java.util.Comparator;
 
+/**
+ * Filters session for film name in english
+ */
 public class SessionForFilmNameComparator implements Comparator {
     @Override
     public int compare(Object o1, Object o2) {

@@ -16,7 +16,8 @@
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+          rel="stylesheet">
 
     <!-- Bootstrap CSS File -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +43,6 @@
 <body>
 
 
-
 <!--==========================
   Header
 ============================-->
@@ -50,13 +50,13 @@
 
 <br>
 <div class="center-block">
-<c:set var="lang" value="${sessionScope.session_lang}"></c:set>
-<c:forEach var="tickets" items="${sessionScope.tickets}">
-    <h3>${tickets.getTicketInfo(lang)}</h3><br>
-</c:forEach>
-<form action="makeOrder" method="post">
-    <button type="submit" class="btn btn-info"><h3><lng:tr text="Make_order" locale="${lang}"/></h3></button>
-</form>
+    <c:set var="lang" value="${sessionScope.session_lang}"></c:set>
+    <c:forEach var="tickets" items="${sessionScope.tickets}">
+        <h3>${tickets.getTicketInfo(lang)}</h3><br>
+    </c:forEach>
+    <form action="makeOrder" method="post">
+        <button type="submit" class="btn btn-info"><h3><lng:tr text="Make_order" locale="${lang}"/></h3></button>
+    </form>
 </div>
 <!-- JavaScript Libraries -->
 <script src="lib/jquery/jquery.min.js"></script>

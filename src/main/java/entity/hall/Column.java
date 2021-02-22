@@ -2,7 +2,17 @@ package entity.hall;
 
 import java.util.List;
 
+/**
+ * I`m so sorry i mixed up columns and rows
+ * This is java bean for row entity
+ */
 public class Column {
+    /**
+     * id - row's id
+     * price - price for row
+     * hall - to which hall row belongs
+     * seats - what seats this row has
+     */
     int id;
     float price;
     Hall hall;

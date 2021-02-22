@@ -16,7 +16,8 @@
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+          rel="stylesheet">
 
     <!-- Bootstrap CSS File -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -40,7 +41,7 @@
 </head>
 
 <body>
-<%@include file="jspf/navbar.jspf"%>
+<%@include file="jspf/navbar.jspf" %>
 <c:set var="ses_role" value="${sessionScope.ses_role}"></c:set>
 <c:set var="lang" value="${sessionScope.session_lang}"></c:set>
 <br>
@@ -52,19 +53,22 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
-                <input name="name" class="form-control" placeholder="<lng:tr text="Name" locale="${lang}"></lng:tr>" type="text">
+                <input name="name" class="form-control" placeholder="<lng:tr text="Name" locale="${lang}"></lng:tr>"
+                       type="text" required>
             </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
-                <input name="email" class="form-control" placeholder="<lng:tr text="Email_address" locale="${lang}"></lng:tr>" type="email">
+                <input name="email" class="form-control"
+                       placeholder="<lng:tr text="Email_address" locale="${lang}"></lng:tr>" type="email" required
+                       pattern="\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b">
             </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-building"></i> </span>
                 </div>
-                <select name="gender" class="form-control">
+                <select name="gender" class="form-control" required>
                     <option value="MALE" selected><lng:tr text="Male" locale="${lang}"></lng:tr></option>
                     <option value="FEMALE"><lng:tr text="Female" locale="${lang}"></lng:tr></option>
                 </select>
@@ -73,26 +77,32 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
                 </div>
-                <input name="birthday" class="form-control" placeholder="<lng:tr text="Your_birthday" locale="${lang}"></lng:tr>" type="date">
+                <input name="birthday" class="form-control"
+                       placeholder="<lng:tr text="Your_birthday" locale="${lang}"></lng:tr>" type="date" required>
             </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input name="pass" class="form-control" placeholder="<lng:tr text="Password" locale="${lang}"></lng:tr>" type="password">
+                <input name="pass" class="form-control" placeholder="<lng:tr text="Password" locale="${lang}"></lng:tr>"
+                       type="password" required
+                       pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                       title="<lng:tr text="PassPattern" locale="${lang}"/>">
             </div>
             <c:if test="${ses_role eq 'ADMIN'}">
-            <select name="role" class="form-control">
-                <option value="USER" selected><lng:tr text="User" locale="${lang}"></lng:tr></option>
-                <option value="ADMIN"><lng:tr text="Admin" locale="${lang}"></lng:tr></option>
-            </select>
+                <select name="role" class="form-control">
+                    <option value="USER" selected><lng:tr text="User" locale="${lang}"></lng:tr></option>
+                    <option value="ADMIN"><lng:tr text="Admin" locale="${lang}"></lng:tr></option>
+                </select>
             </c:if>
             <!-- form-group// -->
             <!-- form-group// -->
             <div class="form-group">
-                <button type="submit" class="btn btn-info"><h6><lng:tr text="Create_account" locale="${lang}"></lng:tr></h6></button>
+                <button type="submit" class="btn btn-info"><h6><lng:tr text="Create_account"
+                                                                       locale="${lang}"></lng:tr></h6></button>
             </div> <!-- form-group// -->
-            <p class="text-center"><h5><lng:tr text="Have_account" locale="${lang}"/></h5> <a href="/sign_in"><lng:tr text="Login" locale="${lang}"></lng:tr></a> </p>
+            <p class="text-center"><h5><lng:tr text="Have_account" locale="${lang}"/></h5> <a href="/sign_in"><lng:tr
+                text="servlets.Login" locale="${lang}"></lng:tr></a> </p>
         </form>
     </article>
 </div> <!-- card.// -->

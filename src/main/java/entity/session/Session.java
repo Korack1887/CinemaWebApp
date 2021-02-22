@@ -6,7 +6,16 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+/**
+ * Jva bean to store cinema session information
+ */
 public class Session {
+    /**
+     * id - cinema session id
+     * hall - hall for each session
+     * film - film for each session
+     * dateTime - date for session
+     */
     private int id;
     private Hall hall;
     private Film film;
@@ -54,16 +63,21 @@ public class Session {
     }
 
     public DateTime getDateTime() {
-
         return dateTime;
     }
 
+    /**
+     * @return String of session date in dd.MM - Hh.mm format
+     */
     public String getDayAndMonthAndTime() {
         DateTimeFormatter fmt = DateTimeFormat.forPattern("dd.MM - HH:mm");
         return fmt.print(dateTime);
     }
 
-    public String getTime(){
+    /**
+     * @return Session date hours and minutes
+     */
+    public String getTime() {
         DateTimeFormatter fmt = DateTimeFormat.forPattern("HH:mm");
         return fmt.print(dateTime);
     }

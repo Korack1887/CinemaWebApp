@@ -16,7 +16,8 @@
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+          rel="stylesheet">
 
     <!-- Bootstrap CSS File -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -52,7 +53,7 @@
         <nav id="nav-menu-container">
             <ul class="nav-menu">
                 <li class="menu-active"><a href="/hello">Home</a></li>
-                <li><a href="/sign_in">Login</a></li>
+                <li><a href="/sign_in">servlets.Login</a></li>
                 <li><a href="/login">Register</a></li>
                 <li><a href="/makeOrder" class="icon ion-android-cart"></a></li>
                 <li><c:if test="${not empty sessionScope.ses_role}">
@@ -67,44 +68,46 @@
 <main id="main">
     <div class="container">
         <div class="row">
-        <div class="col-lg-4">
+            <div class="col-lg-4">
                 <div class="member-info">
-            <img src="/images/${film.image}" class="img-fluid">
+                    <img src="/images/${film.image}" class="img-fluid">
                 </div>
             </div>
-        <div class="col-sm-6">
-            <div class="row">
-                <h4><b><lng:tr text="Name_film" locale="${lang}"/>:</b> ${film.langName(lang)}</h4>
+            <div class="col-sm-6">
+                <div class="row">
+                    <h4><b><lng:tr text="Name_film" locale="${lang}"/>:</b> ${film.langName(lang)}</h4>
+                </div>
+                <div class="row">
+                    <h5><b><lng:tr text="Description" locale="${lang}"/>:</b> ${film.langDescription(lang)}</h5>
+                </div>
+                <div class="row">
+                    <h5><b><lng:tr text="Duration" locale="${lang}"/>:</b> ${film.duration} <lng:tr text="Minutes"
+                                                                                                    locale="${lang}"/>
+                    </h5>
+                </div>
+                <div class="row">
+                    <h5><b><lng:tr text="Genres" locale="${lang}"/>:</b> ${film.genresSTR}</h5>
+                </div>
+                <div class="row">
+                    <h5><b><lng:tr text="Director" locale="${lang}"/>:</b> ${film.director.name}</h5>
+                </div>
+                <div class="row">
+                    <h5><b><lng:tr text="Release" locale="${lang}"/>:</b> ${film.date}</h5>
+                </div>
             </div>
-            <div class="row">
-                 <h5><b><lng:tr text="Description" locale="${lang}"/>:</b> ${film.langDescription(lang)}</h5>
-            </div>
-            <div class="row">
-             <h5><b><lng:tr text="Duration" locale="${lang}"/>:</b> ${film.duration} <lng:tr text="Minutes" locale="${lang}"/></h5>
-         </div>
-            <div class="row">
-                <h5><b><lng:tr text="Genres" locale="${lang}"/>:</b> ${film.genresSTR}</h5>
-            </div>
-            <div class="row">
-                <h5><b><lng:tr text="Director" locale="${lang}"/>:</b> ${film.directorSTR}</h5>
-            </div>
-            <div class="row">
-                <h5><b><lng:tr text="Release" locale="${lang}"/>:</b> ${film.date}</h5>
-            </div>
-        </div>
         </div>
     </div>
     <br>
     <div class="container">
-    <div class="row">
-        <c:forEach var="s" items="${sessions}">
-            <div class="col-sm">
-                <a href="seats?session_id=${s.id}" class="dates">
-            ${s.dayAndMonthAndTime}
-                </a>
-            </div>
-        </c:forEach>
-    </div>
+        <div class="row">
+            <c:forEach var="s" items="${sessions}">
+                <div class="col-sm">
+                    <a href="seats?session_id=${s.id}" class="dates">
+                            ${s.dayAndMonthAndTime}
+                    </a>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 </main>
 <!--container end.//-->

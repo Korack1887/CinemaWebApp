@@ -2,7 +2,6 @@ package server.dao.mysql;
 
 import entity.Ticket;
 import entity.order.Order;
-import entity.user.User;
 import org.apache.log4j.Logger;
 import server.dao.OrderDAO;
 import server.dao.mysql.queries.OrderQueries;
@@ -28,14 +27,14 @@ public class OrderMySQL implements OrderDAO, Connectable {
         return dao;
     }
 
-    public void createOrder(Order order){
+    public void createOrder(Order order) {
         Connection con = getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
         int orderId;
         List<Ticket> tickets = order.getCart();
         ArrayList<Integer> ticketsId = new ArrayList<>();
-        try{
+        try {
             log.debug("Try to create order");
             log.debug("Setting AutoCommit to false");
             con.setAutoCommit(false);
@@ -53,8 +52,8 @@ public class OrderMySQL implements OrderDAO, Connectable {
             }
             log.debug("Adding selected tickets to db");
             st = con.prepareStatement(OrderQueries.SQL_ADD_TICKET, PreparedStatement.RETURN_GENERATED_KEYS);
-            for (Ticket t: tickets
-                 ) {
+            for (Ticket t : tickets
+            ) {
                 st = mapTicket(st, t);
                 st.executeUpdate();
                 rs = st.getGeneratedKeys();
@@ -70,25 +69,32 @@ public class OrderMySQL implements OrderDAO, Connectable {
             st.executeBatch();
             log.debug("Try to add tickets to order");
             st = con.prepareStatement(OrderQueries.SQL_ADD_TO_CART);
-            for (Integer t: ticketsId
-                 ) {
+            for (Integer t : ticketsId
+            ) {
                 st.setInt(1, orderId);
                 st.setInt(2, t);
                 st.addBatch();
             }
             st.executeBatch();
             MysqlDAOFactory.commit(con);
-        }catch (SQLException e){
+        } catch (SQLException e) {
             log.debug("Error while creating new order");
             MysqlDAOFactory.rollback(con);
             e.printStackTrace();
-        }finally {
+        } finally {
             MysqlDAOFactory.setAutocommit(con, true);
             MysqlDAOFactory.closeResultSet(rs);
             MysqlDAOFactory.closeStatement(st);
             MysqlDAOFactory.close(con);
         }
     }
+
+    /**
+     * @param st    PreparedStatement to be filled
+     * @param order to fill st with information
+     * @return filled PreparedStatement
+     * @throws SQLException if error occures during PreparedStatement.set
+     */
     public PreparedStatement mapOrder(PreparedStatement st, Order order) throws SQLException {
         st.setInt(1, order.getId());
         st.setString(2, order.getStatus().toString());
@@ -97,6 +103,13 @@ public class OrderMySQL implements OrderDAO, Connectable {
         st.setFloat(5, order.getTotal_price());
         return st;
     }
+
+    /**
+     * @param st     PreparedStatement to fill with data
+     * @param ticket object to fill st with data
+     * @return filled PreparedStatement
+     * @throws SQLException
+     */
     public PreparedStatement mapTicket(PreparedStatement st, Ticket ticket) throws SQLException {
         st.setInt(1, ticket.getId());
         st.setInt(2, ticket.getSeat().getId());
@@ -104,4 +117,4 @@ public class OrderMySQL implements OrderDAO, Connectable {
         st.setInt(4, ticket.getColumn().getId());
         return st;
     }
-    }
+}

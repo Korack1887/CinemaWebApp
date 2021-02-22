@@ -16,7 +16,8 @@
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+          rel="stylesheet">
 
     <!-- Bootstrap CSS File -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -40,7 +41,7 @@
 </head>
 
 <body>
-<%@include file="jspf/navbar.jspf"%>
+<%@include file="jspf/navbar.jspf" %>
 <c:set var="lang" value="${sessionScope.session_lang}"></c:set>
 <br>
 <div class="card">
@@ -52,18 +53,21 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
-                <input name="email" class="form-control" placeholder="<lng:tr text="Email_address" locale="${lang}"/>" type="email">
+                <input name="email" class="form-control" placeholder="<lng:tr text="Email_address" locale="${lang}"/>"
+                       type="email" required>
             </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input name="pass" class="form-control" placeholder="<lng:tr text="Password" locale="${lang}"/>" type="password">
+                <input name="pass" class="form-control" placeholder="<lng:tr text="Password" locale="${lang}"/>"
+                       type="password" required>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-info"><h6><lng:tr text="Login" locale="${lang}"/></h6></button>
             </div><!-- form-group// -->
-            <p class="text-center"><h5><lng:tr text="Dont_have_account" locale="${lang}"/></h5> <a href="/sign_in"><lng:tr text="Register" locale="${lang}"/></a> </p>
+            <p class="text-center"><h5><lng:tr text="Dont_have_account" locale="${lang}"/></h5> <a
+                href="/sign_in"><lng:tr text="Register" locale="${lang}"/></a> </p>
         </form>
     </article>
 </div> <!-- card.// -->

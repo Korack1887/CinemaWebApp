@@ -8,8 +8,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Sorts session by available seats in ascending and descending order
+ */
 public class SortSessionBySeats {
-    public static HashMap<Session, Integer> sortAsc(HashMap<Session, Integer> sessions){
+    public static HashMap<Session, Integer> sortAsc(HashMap<Session, Integer> sessions) {
         HashMap<Session, Integer> result;
         result = sessions.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.naturalOrder()))
@@ -17,7 +20,8 @@ public class SortSessionBySeats {
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
         return result;
     }
-    public static HashMap<Session, Integer> sortDesc(HashMap<Session, Integer> sessions){
+
+    public static HashMap<Session, Integer> sortDesc(HashMap<Session, Integer> sessions) {
         HashMap<Session, Integer> result;
         result = sessions.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))

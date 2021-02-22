@@ -1,19 +1,30 @@
 package entity.order;
 
 import entity.Ticket;
-import entity.user.Role;
 import entity.user.User;
 
 import java.sql.Date;
 import java.util.List;
 
 
+/**
+ * Java bean for order entity
+ */
 public class Order {
+    /**
+     * id - order id
+     * cart - number of tickets that was ordered
+     * status - order status(paid/unpaid)
+     * user - user that created this order
+     * date - order creation date
+     * total_price - full price for all ordered tickets
+     */
     private int id;
     private List<Ticket> cart;
     private OrderStatus status;
     private User user;
     private Date date;
+    private int total_price;
 
     public int getId() {
         return id;
@@ -63,6 +74,12 @@ public class Order {
         this.total_price = total_price;
     }
 
+    /**
+     * Constructor for new order
+     *
+     * @param cart
+     * @param user
+     */
     public Order(List<Ticket> cart, User user) {
         this.status = OrderStatus.valueOf("UNPAID");
         this.date = new Date(System.currentTimeMillis());
@@ -79,6 +96,7 @@ public class Order {
         this.date = date;
         this.total_price = total_price;
     }
+
     public Order(List<Ticket> cart, OrderStatus status, User user, Date date, int total_price) {
         this.cart = cart;
         this.status = status;
@@ -86,7 +104,5 @@ public class Order {
         this.date = date;
         this.total_price = total_price;
     }
-
-    private int total_price;
 
 }
