@@ -10,9 +10,9 @@ public interface OrderQueries {
             "(?, ?, ?, ?, ?);";
 
     String SQL_ADD_TICKET = "INSERT INTO `ticket`\n" +
-            "(`id_ticket`,`id_seat`,`id_session`,`id_column`)\n" +
+            "(`id_ticket`,`id_seat`,`id_session`,`id_column`,`status`)\n" +
             "VALUES\n" +
-            "(? ,? ,? ,? );";
+            "(? ,? ,? ,?, ? );";
 
     String SQL_ADD_TO_CART = "INSERT INTO `orderhasticket`\n" +
             "(`id_order`,`id_ticket`)\n" +

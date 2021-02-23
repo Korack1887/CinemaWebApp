@@ -70,11 +70,16 @@ public class CreateSessionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.trace("doPost start");
         DateTime date = new DateTime(req.getParameter("date_get"));
-        int qwe = date.getHourOfDay();
         if (date.getHourOfDay() < 22 && date.getHourOfDay() >= 9) {
             Session getSession = new Session(dao.getHallDAO().getHall(1),
                     dao.getFilmDAO().getFilm(Integer.parseInt(req.getParameter("film_get"))), new DateTime(req.getParameter("date_get")));
-            dao.getSessionDAO().addSession(getSession);
+            if(req.getParameter("blocked")!=null){
+                dao.getSessionDAO().makeSessionWithRestrictions(getSession);
+            }
+            else {
+                dao.getSessionDAO().addSession(getSession);
+            }
+
             log.debug("Send created session to db");
         }
         resp.sendRedirect("/sessions_for_day" + "?" + req.getParameter("day"));

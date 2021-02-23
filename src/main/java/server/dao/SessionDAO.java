@@ -10,7 +10,7 @@ public interface SessionDAO {
     /**
      * @param session object to put into database
      */
-    void addSession(Session session);
+    int addSession(Session session);
 
     /**
      * @param id to find object in database
@@ -35,5 +35,7 @@ public interface SessionDAO {
      * @return List of cinema sessions for film id
      */
     ArrayList<Session> getSessionForFilm(int id);
+
+    void makeSessionWithRestrictions(Session session);
 
 }

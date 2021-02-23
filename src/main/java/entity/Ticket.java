@@ -20,6 +20,15 @@ public class Ticket {
     Session session;
     Seat seat;
     Column column;
+    TicketStatus status;
+
+    public TicketStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TicketStatus status) {
+        this.status = status;
+    }
 
     public Ticket() {
     }
@@ -83,6 +92,7 @@ public class Ticket {
         this.session = session;
         this.seat = seat;
         this.column = column;
+        this.status = TicketStatus.UNBLOCKED;
     }
 
     public String getTicketInfo(String lang) {
@@ -97,5 +107,6 @@ public class Ticket {
         this.session = session;
         this.seat = seat;
         this.column = column;
+        this.status = TicketStatus.UNBLOCKED;
     }
 }

@@ -88,10 +88,10 @@
                 <c:set var="total_price" value="${total_price+s.seat.price+s.column.price}"></c:set>
             </c:forEach>
         </div>
-        <h3>Total tickets: ${total_tickets}</h3><br>
+        <h3>Total booked tickets: ${total_tickets}</h3><br>
         <h3>Total price: ${total_price}</h3><br>
-        <h3>Sessions for film: ${session_count}</h3><br>
-        <h3>Available seats: ${session_count*50-total_tickets}</h3>
+        <h3>Total Sessions for film: ${session_count}</h3><br>
+        <h3>Total Unbooked tickets: ${session_count*50-total_tickets}</h3>
     </div>
 </main>
 <!--container end.//-->

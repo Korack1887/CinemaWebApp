@@ -1,10 +1,13 @@
 package server.dao.mysql;
 
+import entity.Ticket;
+import entity.TicketStatus;
 import entity.session.Session;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import server.dao.SessionDAO;
 import server.dao.mysql.queries.FilmQueries;
+import server.dao.mysql.queries.OrderQueries;
 import server.dao.mysql.queries.SessionQueries;
 
 import java.sql.*;
@@ -26,17 +29,27 @@ public class SessionMySQL implements SessionDAO, Connectable {
     }
 
     @Override
-    public void addSession(Session session) {
+    public int addSession(Session session) {
         Connection con = getConnection();
         PreparedStatement st = null;
+        int sessionId;
         try {
             log.debug("Try create session");
-            st = con.prepareStatement(SessionQueries.SQL_ADD_NEW_SESSION);
+            st = con.prepareStatement(SessionQueries.SQL_ADD_NEW_SESSION, PreparedStatement.RETURN_GENERATED_KEYS);
             st.setInt(1, session.getId());
             st.setInt(2, session.getHall().getId());
             st.setTimestamp(3, new Timestamp(session.getDateTime().getMillis()));
             st.setInt(4, session.getFilm().getId());
             st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs.next()) {
+                sessionId = rs.getInt(1);
+                log.debug("Inserted session id --> " + sessionId);
+                return sessionId;
+            } else {
+                log.error("No data inserted");
+                throw new SQLException("addSession: No data inserted");
+            }
         } catch (SQLException e) {
             log.debug("Error while creating session");
             e.printStackTrace();
@@ -44,6 +57,7 @@ public class SessionMySQL implements SessionDAO, Connectable {
             MysqlDAOFactory.closeStatement(st);
             MysqlDAOFactory.close(con);
         }
+        return -1;
     }
 
     @Override
@@ -117,6 +131,36 @@ public class SessionMySQL implements SessionDAO, Connectable {
             MysqlDAOFactory.close(con);
         }
         return result;
+    }
+
+    @Override
+    public void makeSessionWithRestrictions(Session session) {
+        ArrayList<Ticket> blockedTickets = new ArrayList<>();
+        int sessionId = addSession(session);
+        for(int i=1;i<session.getHall().getColumns()+1;i++){
+            for(int j=1;j<session.getHall().getSeats()+1;j+=3){
+                Ticket ticket = new Ticket(getSession(sessionId),HallMySQL.getInstance().getSeatById(j),HallMySQL.getInstance().getColumn(i));
+                ticket.setStatus(TicketStatus.BLOCKED);
+                blockedTickets.add(ticket);
+            }
+        }
+        Connection con = getConnection();
+        PreparedStatement st = null;
+        try{
+            st = con.prepareStatement(OrderQueries.SQL_ADD_TICKET);
+            for (Ticket t: blockedTickets
+                 ) {
+                st = OrderMySQL.getInstance().mapTicket(st, t);
+                st.setString(5, "BLOCKED");
+                st.addBatch();
+            }
+            st.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MysqlDAOFactory.closeStatement(st);
+            MysqlDAOFactory.close(con);
+        }
     }
 
     /**

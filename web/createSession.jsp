@@ -24,6 +24,8 @@
             <option value="${film.id}">${film.name}</option>
         </c:forEach>
     </select>
+    <h4>Virus restrictions <input type="checkbox" name="blocked" value="true"></h4>
+
     <input type="submit">
 </form>
 </body>
