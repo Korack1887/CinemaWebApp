@@ -1,6 +1,7 @@
 package entity.hall;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * I`m so sorry i mixed up columns and rows
@@ -16,6 +17,21 @@ public class Column {
     int id;
     float price;
     Hall hall;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Column column = (Column) o;
+        return id == column.id &&
+                Objects.equals(hall, column.hall);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, hall);
+    }
+
     List<Seat> seats;
 
     @Override

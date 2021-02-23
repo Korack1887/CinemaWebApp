@@ -348,11 +348,41 @@ public class FilmMySQL implements FilmDAO, Connectable {
     }
 
     public void updateFilm(Film film) {
-
+        Connection con = getConnection();
+        PreparedStatement st = null;
+        try {
+            st = con.prepareStatement(FilmQueries.SQL_UPDATE_FILM);
+            st.setString(1, film.getDescription());
+            st.setString(2, film.getName());
+            st.setDate(3, film.getDate());
+            st.setInt(4, film.getDuration());
+            st.setInt(5, film.getDirector().getId());
+            st.setString(6, film.getDescriptionUa());
+            st.setString(7, film.getNameUa());
+            st.setString(8, film.getImage());
+            st.setInt(9, film.getId());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MysqlDAOFactory.closeStatement(st);
+            MysqlDAOFactory.close(con);
+        }
     }
 
     public void deleteFilm(int id) {
-
+        Connection con = getConnection();
+        PreparedStatement st = null;
+        try{
+            st = con.prepareStatement(FilmQueries.SQL_DELETE_FILM);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            MysqlDAOFactory.closeStatement(st);
+            MysqlDAOFactory.close(con);
+        }
     }
 
     /**

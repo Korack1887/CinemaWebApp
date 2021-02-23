@@ -51,12 +51,22 @@
 <br>
 <div class="center-block">
     <c:set var="lang" value="${sessionScope.session_lang}"></c:set>
-    <c:forEach var="tickets" items="${sessionScope.tickets}">
-        <h3>${tickets.getTicketInfo(lang)}</h3><br>
+    <c:set var="tickets" value="${sessionScope.tickets}"></c:set>
+    <c:choose>
+        <c:when test="${not empty tickets}">
+    <c:forEach var="ticket" items="${tickets}">
+        <h3>${ticket.getTicketInfo(lang)}
+        <a href="removeTicket?ticket_id=${ticket.id}">Remove from cart</a>
+        </h3><br>
     </c:forEach>
     <form action="makeOrder" method="post">
         <button type="submit" class="btn btn-info"><h3><lng:tr text="Make_order" locale="${lang}"/></h3></button>
     </form>
+        </c:when>
+        <c:otherwise>
+            <h3>Your cart is empty</h3>
+        </c:otherwise>
+    </c:choose>
 </div>
 <!-- JavaScript Libraries -->
 <script src="lib/jquery/jquery.min.js"></script>

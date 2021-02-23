@@ -48,6 +48,6 @@ public class MakeOrder extends HttpServlet {
         dao.getOrderDAO().createOrder(order);
         log.debug("Order created");
         req.getSession().removeAttribute("tickets");
-        resp.sendRedirect("/hello");
+        resp.sendRedirect("/");
     }
 }

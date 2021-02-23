@@ -23,7 +23,7 @@ public class LogOut extends HttpServlet {
         HttpSession session = req.getSession();
         session.invalidate();
         log.debug("session invalidated");
-        resp.sendRedirect("/hello");
+        resp.sendRedirect("/");
         log.trace("doPost finish");
     }
 

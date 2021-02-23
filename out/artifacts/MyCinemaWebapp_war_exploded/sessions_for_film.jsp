@@ -40,29 +40,9 @@
     ======================================================= -->
 </head>
 <c:set var="lang" value="${sessionScope.session_lang}"></c:set>
-
+<c:set var="role" value="${sessionScope.ses_role}"></c:set>
 <body>
-<header id="header">
-    <div class="container-fluid">
-        <div id="logo" class="pull-left">
-            <h1><a href="#intro" class="scrollto">BizPage</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
-        </div>
-
-        <nav id="nav-menu-container">
-            <ul class="nav-menu">
-                <li class="menu-active"><a href="/hello">Home</a></li>
-                <li><a href="/sign_in">servlets.Login</a></li>
-                <li><a href="/login">Register</a></li>
-                <li><a href="/makeOrder" class="icon ion-android-cart"></a></li>
-                <li><c:if test="${not empty sessionScope.ses_role}">
-                    <a href="/logout"><h2>Log out</h2></a>
-                </c:if></li>
-            </ul>
-        </nav><!-- #nav-menu-container -->
-    </div>
-</header>
+<%@include file="jspf/navbar.jspf"%>
 <br><!-- #header -->
 <c:set var="film" value="${film}"></c:set>
 <main id="main">
@@ -76,6 +56,12 @@
             <div class="col-sm-6">
                 <div class="row">
                     <h4><b><lng:tr text="Name_film" locale="${lang}"/>:</b> ${film.langName(lang)}</h4>
+                    <c:if test="${role eq 'ADMIN'}">
+                    <a href="update_film?film_id=${film.id}">Update film info</a>||
+                    </c:if>
+                    <c:if test="${role eq 'ADMIN'}">
+                        <a href="deleteFilm?film_id=${film.id}">Delete film</a>
+                    </c:if>
                 </div>
                 <div class="row">
                     <h5><b><lng:tr text="Description" locale="${lang}"/>:</b> ${film.langDescription(lang)}</h5>

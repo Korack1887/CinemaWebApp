@@ -1,6 +1,8 @@
 package entity.film;
 
 
+import java.util.Objects;
+
 /**
  * Java bean file of film director entity
  */
@@ -10,6 +12,20 @@ public class Director {
      */
     private int id;
     private String Name;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Director director = (Director) o;
+        return id == director.id &&
+                Objects.equals(Name, director.Name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, Name);
+    }
 
     /**
      * Constructor for creating director entity

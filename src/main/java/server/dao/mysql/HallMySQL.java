@@ -163,4 +163,26 @@ public class HallMySQL implements HallDAO, Connectable {
         }
         return null;
     }
+
+    public Seat getSeatById(int id) {
+        Connection con = getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement("select * from seat where id_seat = ?");
+            st.setInt(1, id);
+            rs = st.executeQuery();
+            while (rs.next()) {
+                return new Seat(rs.getInt("id_seat"), rs.getInt("price"), getColumn(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MysqlDAOFactory.closeResultSet(rs);
+            MysqlDAOFactory.closeStatement(st);
+            MysqlDAOFactory.close(con);
+        }
+        return null;
+    }
+
 }

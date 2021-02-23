@@ -1,6 +1,7 @@
 package server.dao.mysql;
 
 import entity.Ticket;
+import entity.hall.Seat;
 import entity.order.Order;
 import org.apache.log4j.Logger;
 import server.dao.OrderDAO;
@@ -116,5 +117,37 @@ public class OrderMySQL implements OrderDAO, Connectable {
         st.setInt(3, ticket.getSession().getId());
         st.setInt(4, ticket.getColumn().getId());
         return st;
+    }
+
+    public Ticket unmapTicket(ResultSet rs) throws SQLException {
+        Ticket result = new Ticket(rs.getInt("id_ticket")
+                , SessionMySQL.getInstance().getSession(rs.getInt("id_session"))
+                ,HallMySQL.getInstance().getSeatById(rs.getInt("id_seat"))
+                , HallMySQL.getInstance().getColumn(rs.getInt("id_column")));
+        result.getSeat().setColumn(result.getColumn());
+        return result;
+    }
+
+    @Override
+    public ArrayList<Ticket> reportForFilm(int id) {
+        ArrayList<Ticket> result = new ArrayList<>();
+        Connection con = getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = con.prepareStatement(OrderQueries.SQL_REPORT_FOR_FILM);
+            st.setInt(1, id);
+            rs = st.executeQuery();
+            while (rs.next()){
+                result.add(unmapTicket(rs));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            MysqlDAOFactory.closeResultSet(rs);
+            MysqlDAOFactory.closeStatement(st);
+            MysqlDAOFactory.close(con);
+        }
+        return result;
     }
 }

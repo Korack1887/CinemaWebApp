@@ -29,7 +29,7 @@ public class ChangeLang extends HttpServlet {
             req.getSession().setAttribute("session_lang", "eng");
             log.debug("Set session locale = ENG");
         }
-        resp.sendRedirect("/hello");
+        resp.sendRedirect("/");
         log.trace("doGet finish");
     }
 }

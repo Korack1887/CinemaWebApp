@@ -5,6 +5,7 @@ import entity.order.Order;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface OrderDAO {
     /**
@@ -14,7 +15,6 @@ public interface OrderDAO {
      */
     void createOrder(Order order);
 
-    PreparedStatement mapOrder(PreparedStatement st, Order order) throws SQLException;
+    ArrayList<Ticket> reportForFilm(int id);
 
-    PreparedStatement mapTicket(PreparedStatement st, Ticket ticket) throws SQLException;
 }

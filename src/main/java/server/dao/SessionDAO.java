@@ -35,4 +35,5 @@ public interface SessionDAO {
      * @return List of cinema sessions for film id
      */
     ArrayList<Session> getSessionForFilm(int id);
+
 }

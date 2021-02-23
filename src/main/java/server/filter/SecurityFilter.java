@@ -20,7 +20,7 @@ public class SecurityFilter implements Filter {
         HttpSession session = req.getSession();
         String role = (String) session.getAttribute("ses_role");
         if (role != "ADMIN") {
-            ((HttpServletResponse) response).sendRedirect("/hello");
+            ((HttpServletResponse) response).sendRedirect("/");
         } else {
             chain.doFilter(req, response);
         }

@@ -1,5 +1,7 @@
 package entity.hall;
 
+import java.util.Objects;
+
 public class Seat {
     int id;
     int price;
@@ -42,5 +44,19 @@ public class Seat {
         this.id = id;
         this.price = price;
         this.column = column;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Seat seat = (Seat) o;
+        return id == seat.id &&
+                Objects.equals(column, seat.column);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, column);
     }
 }

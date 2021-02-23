@@ -44,7 +44,7 @@ public class Authorize extends HttpServlet {
         if (check) {
             req.getSession().setAttribute("ses_role", dao.getUserDAO().getUserByEmail(email).getRole().toString());
             req.getSession().setAttribute("session_email", email);
-            resp.sendRedirect("/hello");
+            resp.sendRedirect("/");
         } else {
             resp.sendRedirect("/sign_in");
         }

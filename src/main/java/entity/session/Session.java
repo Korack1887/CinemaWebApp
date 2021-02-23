@@ -6,6 +6,8 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.util.Objects;
+
 /**
  * Jva bean to store cinema session information
  */
@@ -19,6 +21,20 @@ public class Session {
     private int id;
     private Hall hall;
     private Film film;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Session session = (Session) o;
+        return id == session.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
     private DateTime dateTime;
 
     public Session(Hall hall, Film film, DateTime dateTime) {

@@ -28,6 +28,7 @@ public class AddTicketToCart extends HttpServlet {
     public void init() {
         log.trace("init started");
         dao = GetDAOForServlet.getDAO(this.getServletContext());
+        log.trace("init finish");
     }
 
     @Override

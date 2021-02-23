@@ -4,6 +4,8 @@ import entity.hall.Column;
 import entity.hall.Seat;
 import entity.session.Session;
 
+import java.util.Objects;
+
 /**
  * Java bean to store booked seat
  */
@@ -18,6 +20,22 @@ public class Ticket {
     Session session;
     Seat seat;
     Column column;
+
+    public Ticket() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return id == ticket.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     public int getId() {
         return id;

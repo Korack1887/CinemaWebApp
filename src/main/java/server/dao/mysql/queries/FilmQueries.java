@@ -41,4 +41,18 @@ public interface FilmQueries {
     String SQL_ADD_GENRE = "Insert into genre(id_genre,name) values(?,?)";
 
     String SQL_GET_FILM_COUNT = "Select count(*) as val from film";
+
+    String SQL_UPDATE_FILM = "UPDATE `film`\n" +
+            "SET\n" +
+            "`description` = ?,\n" +
+            "`name` = ?,\n" +
+            "`date_entry` = ?,\n" +
+            "`time_duration` = ?,\n" +
+            "`id_director` = ?,\n" +
+            "`descriptionUa` = ?,\n" +
+            "`nameUa` = ?,\n" +
+            "`image` = ?\n" +
+            "WHERE `id_film` = ?;";
+
+    String SQL_DELETE_FILM = "Delete from film where id_film = ?";
 }

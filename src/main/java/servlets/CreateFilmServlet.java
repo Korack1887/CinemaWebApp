@@ -79,6 +79,6 @@ public class CreateFilmServlet extends HttpServlet {
                 .image(fileName)
                 .build();
         dao.getFilmDAO().addFilm(newFilm);
-        resp.sendRedirect("/hello");
+        resp.sendRedirect("/");
     }
 }

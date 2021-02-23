@@ -6,12 +6,12 @@
     <div class="container-fluid">
 
         <div id="logo" class="pull-left">
-            <h1><a href="/hello">Cinema</a></h1>
+            <h1><a href="/">Cinema</a></h1>
         </div>
 
         <nav id="nav-menu-container">
             <ul class="nav-menu">
-                <li class="menu-active"><a href="/hello"><lng:tr text="Home" locale="${lang}"></lng:tr></a></li>
+                <li class="menu-active"><a href=""><lng:tr text="Home" locale="${lang}"></lng:tr></a></li>
                 <li><a href="/sign_in"><lng:tr text="Login" locale="${lang}"></lng:tr></a></li>
                 <li><a href="/login"><lng:tr text="Register" locale="${lang}"></lng:tr></a></li>
                 <li><a href="/makeOrder" class="icon ion-android-cart"></a></li>

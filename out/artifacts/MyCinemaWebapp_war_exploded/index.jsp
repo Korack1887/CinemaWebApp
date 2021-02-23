@@ -67,10 +67,10 @@
     <div class="container">
         <div class="section-header wow fadeInUp">
             <h3><lng:tr text="Sessions" locale="${lang}"></lng:tr></h3>
-            <p><a href="/hello?sort_content=film">|<lng:tr text="Sort_by_film_name" locale="${lang}"></lng:tr>|</a></p>
-            <p><a href="/hello?sort_content=">|<lng:tr text="Sort_by_session_date" locale="${lang}"></lng:tr>|</a></p>
+            <p><a href="?sort_content=film">|<lng:tr text="Sort_by_film_name" locale="${lang}"></lng:tr>|</a></p>
+            <p><a href="?sort_content=">|<lng:tr text="Sort_by_session_date" locale="${lang}"></lng:tr>|</a></p>
             <c:if test="${sort eq 'film'}">
-                <p><a href="/hello?sort_content=film&all_film=true">|<lng:tr text="All_films" locale="${lang}"></lng:tr>|</a>
+                <p><a href="?sort_content=film&all_film=true">|<lng:tr text="All_films" locale="${lang}"></lng:tr>|</a>
                 </p>
             </c:if>
         </div>
@@ -95,11 +95,11 @@
                     <div class="center-block">
                         <c:if test="${all eq 'true'}">
                             <c:if test="${page != 0}">
-                                <a href="/hello?sort_content=film&all_film=true&page=${page-1}"
+                                <a href="?sort_content=film&all_film=true&page=${page-1}"
                                    class="icon ion-android-arrow-back"></a>
                             </c:if>
                             <c:if test="${page != last}">
-                                <a href="/hello?sort_content=film&all_film=true&page=${page+1}"
+                                <a href="?sort_content=film&all_film=true&page=${page+1}"
                                    class="icon ion-android-arrow-forward"></a>
                             </c:if>
                         </c:if>

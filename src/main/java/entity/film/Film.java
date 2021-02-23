@@ -76,12 +76,29 @@ public class Film {
         return result;
     }
 
+
+    public Film updateFilm(Film film){
+        this.id = film.getId();
+        this.director = film.getDirector();
+        this.genres = film.getGenres();
+        this.description = film.getDescription();
+        this.descriptionUa = film.getDescriptionUa();
+        this.name = film.getName();
+        this.nameUa = film.getNameUa();
+        this.date = film.getDate();
+        this.duration = film.getDuration();
+        if(film.getImage()!=null) {
+            this.image = image;
+        }
+        return this;
+    }
+
     /**
      * @param lang - user's selected language
      * @return - return film name in english or ukrainian
      */
     public String langName(String lang) {
-        if (lang != null && lang == "eng") {
+        if (lang != null && lang.equals("eng")) {
             return name;
         }
         return nameUa;
@@ -92,7 +109,7 @@ public class Film {
      * @return - return film description in english or ukrainian
      */
     public String langDescription(String lang) {
-        if (lang != null && lang == "eng") {
+        if (lang != null && lang.equals("eng")) {
             return description;
         }
         return descriptionUa;

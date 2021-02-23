@@ -1,5 +1,7 @@
 package entity.film;
 
+import java.util.Objects;
+
 /**
  * Java bean for genre entity
  */
@@ -41,5 +43,19 @@ public class Genre {
     public Genre(int id, String name) {
         this.id = id;
         Name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Genre genre = (Genre) o;
+        return id == genre.id &&
+                Objects.equals(Name, genre.Name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, Name);
     }
 }

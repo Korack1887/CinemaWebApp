@@ -27,6 +27,8 @@
         <url-pattern>/create_film</url-pattern>
         <url-pattern>/createGen</url-pattern>
         <url-pattern>/createSession</url-pattern>
+        <url-pattern>/deleteFilm</url-pattern>
+        <url-pattern>/updateFilm</url-pattern>
 
     </filter-mapping>
     <filter>
